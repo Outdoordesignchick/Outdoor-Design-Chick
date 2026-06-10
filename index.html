@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Outdoor Design Chick — Phoenix, AZ</title>
+  <meta name="description" content="Luxury 3D outdoor design and planning for pools, landscape, and hardscape in Phoenix, AZ. Blurring the lines between indoor and outdoor living." />
+
+  <!-- Google Fonts: Playfair Display SC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── FONT: Garet (self-hosted fallback with system stack) ─── */
+    /* If you have Garet files, place garet.woff2 beside index.html and uncomment:
+    @font-face {
+      font-family: 'Garet';
+      src: url('garet.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    */
+
+    /* ─── TOKENS ─── */
+    :root {
+      --sand:      #F5EFE8;
+      --sage:      #919682;
+      --mist:      #C7CDBF;
+      --moss:      #595E48;
+      --ink:       #2C2C2A;
+      --ink-light: #5a5a57;
+
+      --font-display: 'Playfair Display SC', Georgia, serif;
+      --font-body:    'Garet', 'DM Sans', 'Inter', system-ui, sans-serif;
+
+      --max-w: 1280px;
+      --gutter: clamp(1.5rem, 5vw, 4rem);
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font: inherit; border: none; background: none; }
+
+    /* ─── BASE ─── */
+    body {
+      background: var(--sand);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── DIVIDER MOTIF ─── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 auto;
+      width: fit-content;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      display: block;
+      width: clamp(60px, 8vw, 120px);
+      height: 1px;
+      background: var(--mist);
+    }
+    .divider svg { flex-shrink: 0; }
+
+    /* ─── NAV ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    header.scrolled {
+      background: rgba(245,239,232,0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 var(--mist);
+    }
+    nav {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 1.4rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      letter-spacing: 0.08em;
+      color: var(--sand);
+      transition: color 0.4s;
+      line-height: 1.3;
+    }
+    header.scrolled .nav-logo { color: var(--moss); }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(245,239,232,0.85);
+      transition: color 0.3s;
+    }
+    header.scrolled .nav-links a { color: var(--ink-light); }
+    .nav-links a:hover { color: var(--sand); }
+    header.scrolled .nav-links a:hover { color: var(--moss); }
+
+    .nav-cta {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      border: 1px solid rgba(245,239,232,0.5);
+      color: var(--sand);
+      transition: all 0.3s;
+    }
+    .nav-cta:hover {
+      background: var(--sand);
+      color: var(--moss);
+      border-color: var(--sand);
+    }
+    header.scrolled .nav-cta {
+      border-color: var(--moss);
+      color: var(--moss);
+    }
+    header.scrolled .nav-cta:hover {
+      background: var(--moss);
+      color: var(--sand);
+    }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--sand);
+      transition: background 0.4s;
+    }
+    header.scrolled .nav-toggle span { background: var(--moss); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #3d4232 0%, #595E48 45%, #7a7e6a 100%);
+    }
+    /* Photo slot — swap src for real image */
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      object-position: center 60%;
+      opacity: 0.45;
+      mix-blend-mode: luminosity;
+      width: 100%;
+      height: 100%;
+    }
+    /* Desert botanical SVG overlay — the signature element */
+    .hero-botanical {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: clamp(260px, 38vw, 580px);
+      opacity: 0.13;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: 0 var(--gutter);
+      max-width: 820px;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 1.4rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 400;
+      color: var(--sand);
+      line-height: 1.12;
+      margin-bottom: 1.6rem;
+      letter-spacing: 0.01em;
+    }
+    .hero-tagline {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+      color: rgba(245,239,232,0.75);
+      letter-spacing: 0.04em;
+      font-style: italic;
+      margin-bottom: 2.8rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 1rem 2.4rem;
+      background: var(--sand);
+      color: var(--moss);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover {
+      background: var(--mist);
+    }
+    .btn-outline {
+      padding: 1rem 2.4rem;
+      border: 1px solid rgba(245,239,232,0.45);
+      color: var(--sand);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .btn-outline:hover {
+      border-color: var(--sand);
+      background: rgba(245,239,232,0.08);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(245,239,232,0.45);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(245,239,232,0.4), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 0.8; transform: scaleY(1.1); }
+    }
+
+    /* ─── SECTION SHELL ─── */
+    section {
+      padding: clamp(4rem, 8vw, 8rem) var(--gutter);
+    }
+    .section-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .section-body {
+      color: var(--ink-light);
+      max-width: 52ch;
+      line-height: 1.85;
+    }
+
+    /* ─── INTRO ─── */
+    .intro {
+      background: var(--sand);
+    }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: center;
+    }
+    .intro-image-wrap {
+      position: relative;
+    }
+    .intro-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -16px -16px 16px 16px;
+      border: 1px solid var(--mist);
+      z-index: 0;
+    }
+    .intro-image {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      background: linear-gradient(145deg, var(--mist), var(--sage));
+      /* Swap for real image: <img src="your-photo.jpg" ...> */
+    }
+    .intro-image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(145deg, #d8ddd4, #b5bca8);
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    .intro-image-caption {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,239,232,0.7);
+    }
+    .intro-text { padding: 1rem 0; }
+    .intro-stat-row {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--mist);
+    }
+    .intro-stat dt {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--moss);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .intro-stat dd {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+    }
+    .intro-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--moss);
+      border-bottom: 1px solid var(--mist);
+      padding-bottom: 0.2rem;
+      transition: border-color 0.3s, gap 0.3s;
+    }
+    .intro-link:hover { border-color: var(--moss); gap: 1rem; }
+    .intro-link svg { flex-shrink: 0; }
+
+    /* ─── SERVICES ─── */
+    .services {
+      background: var(--moss);
+    }
+    .services .section-label { color: var(--mist); }
+    .services .section-title { color: var(--sand); }
+    .services .section-body { color: rgba(245,239,232,0.65); max-width: 48ch; }
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 6rem);
+      align-items: end;
+      margin-bottom: clamp(3rem, 5vw, 5rem);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(245,239,232,0.1);
+    }
+    .service-card {
+      background: var(--moss);
+      padding: clamp(2rem, 3.5vw, 3rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 3rem; right: 3rem;
+      height: 1px;
+      background: rgba(245,239,232,0.12);
+    }
+    .service-card:hover { background: #4d5240; }
+    .service-number {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: rgba(199,205,191,0.4);
+      letter-spacing: 0.05em;
+    }
+    .service-icon {
+      width: 32px;
+      height: 32px;
+      opacity: 0.7;
+    }
+    .service-title {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.6vw, 1.3rem);
+      color: var(--sand);
+      font-weight: 400;
+      line-height: 1.3;
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      color: rgba(199,205,191,0.75);
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    /* ─── PROCESS ─── */
+    .process { background: var(--sand); }
+    .process-wrap {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: clamp(3rem, 6vw, 8rem);
+      align-items: start;
+    }
+    .process-sticky { position: sticky; top: 7rem; }
+    .process-steps { display: flex; flex-direction: column; gap: 0; }
+    .process-step {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--mist);
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .process-step:first-child { border-top: 1px solid var(--mist); }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--mist);
+      letter-spacing: 0.05em;
+      padding-top: 0.2rem;
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+    }
+
+    /* ─── PORTFOLIO TEASER ─── */
+    .portfolio { background: #EDE8E0; }
+    .portfolio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+    }
+    .p-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .p-item:nth-child(1) { grid-column: 1 / 8; grid-row: 1 / 3; }
+    .p-item:nth-child(2) { grid-column: 8 / 13; grid-row: 1; }
+    .p-item:nth-child(3) { grid-column: 8 / 13; grid-row: 2; }
+    .p-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: unset;
+      transition: transform 0.6s ease;
+      display: block;
+    }
+    .p-item:nth-child(1) .p-thumb { aspect-ratio: 7/5; }
+    .p-item:nth-child(2) .p-thumb,
+    .p-item:nth-child(3) .p-thumb { aspect-ratio: 5/4; }
+    .p-item:hover .p-thumb { transform: scale(1.04); }
+    .p-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44,44,42,0.55) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    .p-item:hover .p-overlay { opacity: 1; }
+    .p-label {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--sand);
+      letter-spacing: 0.05em;
+    }
+    /* Placeholder gradient thumbnails */
+    .p-placeholder-1 { background: linear-gradient(135deg, #8a9077, #595E48); width: 100%; aspect-ratio: 7/5; }
+    .p-placeholder-2 { background: linear-gradient(135deg, #a8b09a, #7a8268); width: 100%; aspect-ratio: 5/4; }
+    .p-placeholder-3 { background: linear-gradient(135deg, #b5bca8, #919682); width: 100%; aspect-ratio: 5/4; }
+
+    /* ─── QUOTE ─── */
+    .quote-section {
+      background: var(--sand);
+      text-align: center;
+      padding: clamp(4rem, 7vw, 7rem) var(--gutter);
+    }
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.6rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--moss);
+      max-width: 720px;
+      margin: 1.5rem auto;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+    }
+    .quote-attr {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-top: 1rem;
+    }
+
+    /* ─── CTA BAND ─── */
+    .cta-band {
+      background: var(--moss);
+      padding: clamp(3.5rem, 6vw, 6rem) var(--gutter);
+    }
+    .cta-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 400;
+      color: var(--sand);
+      line-height: 1.2;
+    }
+    .cta-sub {
+      color: rgba(199,205,191,0.7);
+      margin-top: 0.7rem;
+      font-size: 0.95rem;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .btn-sand {
+      padding: 1rem 2.2rem;
+      background: var(--sand);
+      color: var(--moss);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+    .btn-sand:hover { background: var(--mist); }
+    .btn-ghost-light {
+      padding: 1rem 2.2rem;
+      border: 1px solid rgba(245,239,232,0.35);
+      color: var(--sand);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .btn-ghost-light:hover { border-color: var(--sand); background: rgba(245,239,232,0.08); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #1e201a;
+      color: rgba(245,239,232,0.6);
+      padding: clamp(3rem, 5vw, 5rem) var(--gutter) 2rem;
+    }
+    .footer-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(245,239,232,0.08);
+    }
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--sand);
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+    .footer-tagline {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(245,239,232,0.4);
+      line-height: 1.7;
+      margin-bottom: 1.4rem;
+    }
+    .footer-contact a {
+      display: block;
+      font-size: 0.82rem;
+      color: rgba(245,239,232,0.55);
+      line-height: 1.9;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--mist); }
+    .footer-col-title {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,239,232,0.3);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.55rem; }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: rgba(245,239,232,0.55);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--mist); }
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin: 1.6rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: rgba(245,239,232,0.25);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ─── MOBILE NAV ─── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(89,94,72,0.97);
+      z-index: 99;
+      padding: 6rem var(--gutter) 3rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      color: var(--sand);
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(245,239,232,0.1);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--mist); }
+    .mobile-close {
+      position: absolute;
+      top: 1.6rem; right: var(--gutter);
+      color: var(--sand);
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .intro-grid { grid-template-columns: 1fr; }
+      .intro-image-wrap { display: none; }
+      .services-header { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .process-wrap { grid-template-columns: 1fr; }
+      .process-sticky { position: static; }
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .p-item:nth-child(1) { grid-column: 1 / 3; grid-row: auto; }
+      .p-item:nth-child(2) { grid-column: 1 / 2; grid-row: auto; }
+      .p-item:nth-child(3) { grid-column: 2 / 3; grid-row: auto; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .intro-stat-row { gap: 1.5rem; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .p-item:nth-child(1),
+      .p-item:nth-child(2),
+      .p-item:nth-child(3) { grid-column: 1; grid-row: auto; }
+    }
+
+    /* ─── FADE-IN ON SCROLL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .hero-scroll-line { animation: none; }
+      .p-item:hover .p-thumb { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── MOBILE MENU ─── -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+  <a href="#intro" onclick="closeMobileMenu()">About</a>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#portfolio" onclick="closeMobileMenu()">Portfolio</a>
+  <a href="#process" onclick="closeMobileMenu()">Process</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</nav>
+
+<!-- ─── NAV ─── -->
+<header id="siteHeader">
+  <nav aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="Outdoor Design Chick Home">
+      Outdoor Design Chick
+    </a>
+    <ul class="nav-links">
+      <li><a href="#intro">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#process">Process</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Start Your Project</a>
+    <button class="nav-toggle" onclick="openMobileMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ─── HERO ─── -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg"></div>
+  <!--
+    PHOTO: Replace the div below with:
+    <img class="hero-photo" src="your-hero-image.jpg" alt="Luxury outdoor living space in Phoenix" />
+  -->
+  <div style="position:absolute;inset:0;background:url('') center/cover no-repeat;opacity:0.4;"></div>
+
+  <!-- Signature: Desert Botanical SVG — Agave (left) + Saguaro (right) -->
+  <svg class="hero-botanical" viewBox="0 0 500 700" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+    <!-- ═══ AGAVE (left side, centered ~x=130) ═══ -->
+    <!-- Tall center spike -->
+    <path d="M130 658 C130 640 130 608 129 572 C128 538 126 505 124 478 L123 474"
+          stroke="#F5EFE8" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <!-- Upper-left long leaf -->
+    <path d="M130 658 C124 642 112 614 96 588 C80 562 60 542 44 528 L41 526"
+          stroke="#F5EFE8" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+    <!-- Upper-right long leaf -->
+    <path d="M130 658 C136 642 150 614 168 590 C186 566 206 548 222 535 L224 533"
+          stroke="#F5EFE8" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+    <!-- Mid-left diagonal -->
+    <path d="M130 658 C122 645 106 624 88 606 C70 588 48 574 30 565 L27 564"
+          stroke="#F5EFE8" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+    <!-- Mid-right diagonal -->
+    <path d="M130 658 C138 645 154 623 172 605 C190 587 212 573 228 565 L231 563"
+          stroke="#F5EFE8" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+    <!-- Arching left-low -->
+    <path d="M130 658 C118 652 100 642 78 634 C56 626 30 621 8 620 L4 620"
+          stroke="#F5EFE8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+    <!-- Arching right-low -->
+    <path d="M130 658 C142 652 160 642 182 634 C204 626 228 622 248 621 L251 621"
+          stroke="#F5EFE8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+    <!-- Nearly horizontal left -->
+    <path d="M130 658 C116 655 96 652 72 652 C48 652 24 654 4 657 L1 657"
+          stroke="#F5EFE8" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+    <!-- Nearly horizontal right -->
+    <path d="M130 658 C144 655 164 652 188 652 C212 653 236 655 254 658 L257 658"
+          stroke="#F5EFE8" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+    <!-- Inner fill leaves -->
+    <path d="M130 658 C127 644 124 622 122 596 C120 572 120 546 121 524 L121 522"
+          stroke="#F5EFE8" stroke-width="0.9" stroke-linecap="round" fill="none" opacity="0.65"/>
+    <path d="M130 658 C133 644 137 621 140 595 C143 570 142 544 140 522 L140 520"
+          stroke="#F5EFE8" stroke-width="0.9" stroke-linecap="round" fill="none" opacity="0.65"/>
+
+    <!-- ═══ SAGUARO (right side, center x=370, trunk width=50) ═══ -->
+    <!-- Trunk: left edge x=345, right edge x=395, top y=80 -->
+    <path d="M345 680 L345 105" stroke="#F5EFE8" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <path d="M395 680 L395 105" stroke="#F5EFE8" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <!-- Rounded top cap -->
+    <path d="M345 105 C345 70 395 70 395 105" stroke="#F5EFE8" stroke-width="1.8" fill="none"/>
+    <!-- Trunk ribs -->
+    <line x1="357" y1="680" x2="357" y2="110" stroke="#F5EFE8" stroke-width="0.6" opacity="0.4"/>
+    <line x1="370" y1="680" x2="370" y2="72" stroke="#F5EFE8" stroke-width="0.6" opacity="0.4"/>
+    <line x1="383" y1="680" x2="383" y2="110" stroke="#F5EFE8" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- LEFT ARM — outer edge x=270, inner edge x=295, arm top y=220 -->
+    <!-- Outer elbow + vertical -->
+    <path d="M345 420 C322 418 300 405 285 382 C270 358 270 330 270 305 L270 240"
+          stroke="#F5EFE8" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <!-- Inner elbow + vertical -->
+    <path d="M345 445 C328 443 310 432 298 412 C286 390 295 358 295 330 L295 244"
+          stroke="#F5EFE8" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <!-- Arm top cap -->
+    <path d="M270 240 C270 218 295 218 295 240" stroke="#F5EFE8" stroke-width="1.8" fill="none"/>
+    <!-- Arm rib -->
+    <line x1="282" y1="305" x2="282" y2="222" stroke="#F5EFE8" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- RIGHT ARM — outer edge x=470, inner edge x=445, arm top y=180 -->
+    <!-- Inner elbow + vertical -->
+    <path d="M395 360 C418 356 438 342 450 318 C462 294 445 262 445 234 L445 200"
+          stroke="#F5EFE8" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <!-- Outer elbow + vertical -->
+    <path d="M395 338 C422 332 448 316 462 290 C476 264 470 232 470 204 L470 184"
+          stroke="#F5EFE8" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <!-- Arm top cap -->
+    <path d="M445 200 C445 178 470 178 470 200" stroke="#F5EFE8" stroke-width="1.8" fill="none"/>
+    <!-- Arm rib -->
+    <line x1="458" y1="260" x2="458" y2="182" stroke="#F5EFE8" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Ground line -->
+    <line x1="0" y1="679" x2="500" y2="679" stroke="#F5EFE8" stroke-width="0.6" opacity="0.2"/>
+
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Phoenix, Arizona · Luxury Outdoor Design</p>
+    <h1 class="hero-title">Where Your Home<br>Meets the Desert</h1>
+    <p class="hero-tagline">Blurring the lines between indoor and outdoor living</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start Your Design</a>
+      <a href="#portfolio" class="btn-outline">View Our Work</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ─── INTRO ─── -->
+<section class="intro" id="intro">
+  <div class="section-inner">
+    <div class="intro-grid">
+      <div class="intro-image-wrap reveal">
+        <!--
+          PHOTO: Replace the div below with:
+          <img class="intro-image" src="your-portrait-or-project.jpg" alt="Meagen Lenhart, Outdoor Design Chick" />
+        -->
+        <div class="intro-image-placeholder">
+          <span class="intro-image-caption">Your photo here</span>
+        </div>
+      </div>
+      <div class="intro-text reveal">
+        <p class="section-label">About Outdoor Design Chick</p>
+        <h2 class="section-title">Luxury Outdoor<br>Spaces, Designed<br>in 3D</h2>
+        <p class="section-body">
+          Outdoor Design Chick is a Phoenix-based outdoor design studio specializing in photorealistic 3D renderings that let you see your dream space before a single stone is laid. Founded by Meagen Lenhart, we design for high-end new builds and remodels across the Valley — transforming pools, landscapes, and hardscapes into seamless extensions of your home.
+        </p>
+        <p class="section-body" style="margin-top:1rem;">
+          We believe exceptional outdoor living isn't an afterthought — it's the defining character of a home. Our designs honor the desert environment while delivering the livability and elegance of the world's finest interiors.
+        </p>
+        <dl class="intro-stat-row">
+          <div class="intro-stat">
+            <dt>3D</dt>
+            <dd>Design Studio</dd>
+          </div>
+          <div class="intro-stat">
+            <dt>100%</dt>
+            <dd>Client Focus</dd>
+          </div>
+          <div class="intro-stat">
+            <dt>PHX</dt>
+            <dd>Arizona Valley</dd>
+          </div>
+        </dl>
+        <a href="#contact" class="intro-link">
+          Work with Meagen
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DIVIDER ─── -->
+<div style="background:var(--sand);padding:0 0 0.5rem;">
+  <div class="divider">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+      <path d="M6 0L7.5 4.5L12 6L7.5 7.5L6 12L4.5 7.5L0 6L4.5 4.5Z" fill="#C7CDBF"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ─── SERVICES ─── -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="services-header">
+      <div class="reveal">
+        <p class="section-label">What We Do</p>
+        <h2 class="section-title">Full-Spectrum<br>Outdoor Design</h2>
+      </div>
+      <p class="section-body reveal">
+        From the first concept sketch to the final permit, we are your dedicated design partner — bringing every detail of your outdoor vision to life with precision, artistry, and a deep understanding of desert living.
+      </p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <span class="service-number">01</span>
+        <svg class="service-icon" viewBox="0 0 32 32" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 28 Q16 8 28 28Z" stroke-linejoin="round"/>
+          <path d="M10 20 Q16 12 22 20"/>
+          <circle cx="16" cy="24" r="2"/>
+        </svg>
+        <h3 class="service-title">Pool Design</h3>
+        <p class="service-desc">Sculptural pools that read as natural bodies of water, designed to flow with your architecture and landscape. New builds and full remodels.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-number">02</span>
+        <svg class="service-icon" viewBox="0 0 32 32" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 26 Q8 10 16 14 Q24 18 28 6"/>
+          <path d="M4 26 L28 26"/>
+          <path d="M12 26 L10 20 M20 26 L22 18"/>
+        </svg>
+        <h3 class="service-title">Landscape Design</h3>
+        <p class="service-desc">Desert-native planting plans, shade structures, and curated greenscapes that look as intentional in summer heat as they do in a magazine.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-number">03</span>
+        <svg class="service-icon" viewBox="0 0 32 32" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="4" y="18" width="24" height="8" rx="1"/>
+          <path d="M8 18 L8 10 L24 10 L24 18"/>
+          <path d="M12 10 L12 6 L20 6 L20 10"/>
+        </svg>
+        <h3 class="service-title">Hardscape Design</h3>
+        <p class="service-desc">Pavers, outdoor kitchens, pergolas, fire features — every material and surface selected for beauty, durability, and cohesion with your home's palette.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-number">04</span>
+        <svg class="service-icon" viewBox="0 0 32 32" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="5" y="5" width="22" height="22" rx="1"/>
+          <path d="M5 12 L27 12 M12 5 L12 27"/>
+          <path d="M16 16 L20 20 M16 20 L20 16" stroke-width="1"/>
+        </svg>
+        <h3 class="service-title">3D Renderings</h3>
+        <p class="service-desc">Photorealistic 3D visualizations that let you walk through your finished space before construction begins — eliminating guesswork and aligning your vision with your contractor's.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-number">05</span>
+        <svg class="service-icon" viewBox="0 0 32 32" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 26 L6 10 L26 10 L26 26 Z"/>
+          <path d="M10 10 L10 6 L22 6 L22 10"/>
+          <path d="M10 16 L22 16 M10 20 L18 20"/>
+        </svg>
+        <h3 class="service-title">Construction Plans & Permits</h3>
+        <p class="service-desc">Professional construction documentation, HOA submissions, and city permit packages — we handle the paperwork so your project moves forward without delays.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-number">06</span>
+        <svg class="service-icon" viewBox="0 0 32 32" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="16" cy="10" r="4"/>
+          <path d="M8 28 Q8 20 16 20 Q24 20 24 28"/>
+          <path d="M22 12 L26 16 M22 16 L26 12" stroke-width="1"/>
+          <circle cx="24" cy="14" r="5" stroke-dasharray="2 2"/>
+        </svg>
+        <h3 class="service-title">Design Liaison</h3>
+        <p class="service-desc">Meagen acts as your on-call design advocate throughout the build process — communicating your vision directly to contractors and ensuring the finished product matches the plan.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PORTFOLIO TEASER ─── -->
+<section class="portfolio" id="portfolio">
+  <div class="section-inner">
+    <div class="portfolio-header">
+      <div class="reveal">
+        <p class="section-label">Recent Work</p>
+        <h2 class="section-title">Projects That<br>Live Beautifully</h2>
+      </div>
+      <a href="gallery.html" class="intro-link reveal">
+        View Full Gallery
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="portfolio-grid reveal">
+      <!--
+        PHOTOS: Replace each .p-placeholder div with:
+        <img class="p-thumb" src="project-1.jpg" alt="[Project description]" />
+      -->
+      <div class="p-item">
+        <div class="p-placeholder-1" style="height:100%;min-height:320px;"></div>
+        <div class="p-overlay"><span class="p-label">Arcadia Remodel</span></div>
+      </div>
+      <div class="p-item">
+        <div class="p-placeholder-2" style="height:100%;min-height:200px;"></div>
+        <div class="p-overlay"><span class="p-label">Paradise Valley New Build</span></div>
+      </div>
+      <div class="p-item">
+        <div class="p-placeholder-3" style="height:100%;min-height:200px;"></div>
+        <div class="p-overlay"><span class="p-label">Scottsdale Hardscape</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section class="process" id="process">
+  <div class="section-inner">
+    <div class="process-wrap">
+      <div class="process-sticky reveal">
+        <p class="section-label">How It Works</p>
+        <h2 class="section-title">A Thoughtful<br>Design Process</h2>
+        <p class="section-body" style="margin-top:1rem;">
+          Every great outdoor space begins with listening. Our process is designed to translate your ideas — however formed — into a precise, buildable vision you'll be proud of for decades.
+        </p>
+        <a href="#contact" class="intro-link" style="margin-top:2rem;">
+          Get Started
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <span class="step-num">01</span>
+          <div>
+            <h3 class="step-title">Discovery Call</h3>
+            <p class="step-desc">We start with a conversation — your lifestyle, your wishlist, your timeline. No questionnaire, no pressure. Just a real discussion about what your outdoor space can become.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">02</span>
+          <div>
+            <h3 class="step-title">Site Assessment</h3>
+            <p class="step-desc">Meagen reviews your property, existing structures, sun patterns, and HOA or city guidelines to establish the full parameters of the design.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">03</span>
+          <div>
+            <h3 class="step-title">Concept Design</h3>
+            <p class="step-desc">Initial layouts and design directions are developed, grounding your vision in real proportions and material palettes specific to your home.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">04</span>
+          <div>
+            <h3 class="step-title">3D Rendering</h3>
+            <p class="step-desc">Your space comes to life in full photorealistic 3D — day and night views, furniture staging, planting in scale. You'll see exactly what you're building.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">05</span>
+          <div>
+            <h3 class="step-title">Construction Documents & Permits</h3>
+            <p class="step-desc">We produce contractor-ready plans, HOA packages, and permit applications — everything needed to break ground without surprises.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">06</span>
+          <div>
+            <h3 class="step-title">Build Liaison</h3>
+            <p class="step-desc">Meagen stays engaged through construction — available to your contractor, answering design questions, and ensuring the build stays true to the vision.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUOTE ─── -->
+<div class="quote-section">
+  <div class="section-inner">
+    <div class="divider reveal">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M6 0L7.5 4.5L12 6L7.5 7.5L6 12L4.5 7.5L0 6L4.5 4.5Z" fill="#C7CDBF"/>
+      </svg>
+    </div>
+    <blockquote>
+      <p class="quote-text reveal">"The desert doesn't ask you to fight it. It asks you to design with it."</p>
+      <footer class="quote-attr reveal">— Meagen Lenhart, Founder &amp; Lead Designer</footer>
+    </blockquote>
+  </div>
+</div>
+
+<!-- ─── CTA BAND ─── -->
+<div class="cta-band" id="contact">
+  <div class="cta-inner section-inner">
+    <div class="reveal">
+      <h2 class="cta-title">Ready to Design<br>Your Outdoor Living Space?</h2>
+      <p class="cta-sub">Serving Phoenix, Scottsdale, Paradise Valley, and the greater Arizona Valley.</p>
+    </div>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn-sand">Get in Touch</a>
+      <a href="tel:6028856917" class="btn-ghost-light">Call 602-885-6917</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-name">Outdoor Design Chick</p>
+      <p class="footer-tagline">Blurring the lines between<br>indoor and outdoor living.</p>
+      <div class="footer-contact">
+        <a href="tel:6028856917">602-885-6917</a>
+        <a href="mailto:meagen@outdoordesignchick.com">meagen@outdoordesignchick.com</a>
+        <a>Phoenix, Arizona</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Pages</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Services</p>
+      <ul class="footer-links">
+        <li><a href="services.html">Pool Design</a></li>
+        <li><a href="services.html">Landscape Design</a></li>
+        <li><a href="services.html">Hardscape Design</a></li>
+        <li><a href="services.html">3D Renderings</a></li>
+        <li><a href="services.html">Construction Plans</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Follow Along</p>
+      <ul class="footer-links">
+        <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Houzz</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Pinterest</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Outdoor Design Chick · Phoenix, AZ</span>
+    <span>Design by Outdoor Design Chick</span>
+  </div>
+</footer>
+
+<script>
+  // ─── SCROLL: nav style ───
+  const header = document.getElementById('siteHeader');
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ─── MOBILE MENU ───
+  function openMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ─── REVEAL ON SCROLL ───
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Stagger siblings in same parent
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, idx * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
