@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Meagen — Outdoor Design Chick</title>
+  <meta name="description" content="Meet Meagen Lenhart — founder of Outdoor Design Chick. Over a decade in the pool and outdoor construction industry, now designing luxury outdoor spaces in Phoenix, AZ." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /*
+    @font-face {
+      font-family: 'Garet';
+      src: url('garet.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    */
+
+    :root {
+      --sand:      #F5EFE8;
+      --sage:      #919682;
+      --mist:      #C7CDBF;
+      --moss:      #595E48;
+      --ink:       #2C2C2A;
+      --ink-light: #5a5a57;
+      --parchment: #EDE8E0;
+
+      --font-display: 'Playfair Display SC', Georgia, serif;
+      --font-body:    'Garet', 'DM Sans', 'Inter', system-ui, sans-serif;
+
+      --max-w: 1280px;
+      --gutter: clamp(1.5rem, 5vw, 4rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font: inherit; border: none; background: none; }
+
+    body {
+      background: var(--sand);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 auto;
+      width: fit-content;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      display: block;
+      width: clamp(60px, 8vw, 120px);
+      height: 1px;
+      background: var(--mist);
+    }
+
+    /* ─── NAV (identical to homepage) ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(245,239,232,0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 var(--mist);
+    }
+    nav {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 1.4rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      letter-spacing: 0.08em;
+      color: var(--moss);
+      line-height: 1.3;
+    }
+    .nav-links {
+      display: flex;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--moss); }
+    .nav-cta {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      border: 1px solid var(--moss);
+      color: var(--moss);
+      transition: all 0.3s;
+    }
+    .nav-cta:hover { background: var(--moss); color: var(--sand); }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--moss);
+    }
+
+    /* ─── MOBILE MENU ─── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(89,94,72,0.97);
+      z-index: 99;
+      padding: 6rem var(--gutter) 3rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      color: var(--sand);
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(245,239,232,0.1);
+    }
+    .mobile-close {
+      position: absolute;
+      top: 1.6rem; right: var(--gutter);
+      color: var(--sand);
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      padding-top: 7rem;
+      padding-bottom: 0;
+      background: var(--moss);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(3rem, 6vw, 6rem) var(--gutter) 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: end;
+    }
+    .page-hero-text { padding-bottom: clamp(3rem, 5vw, 5rem); }
+    .page-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 1.2rem;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 400;
+      color: var(--sand);
+      line-height: 1.1;
+      margin-bottom: 1.4rem;
+    }
+    .page-subtitle {
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: rgba(199,205,191,0.8);
+      font-style: italic;
+      line-height: 1.7;
+      max-width: 44ch;
+    }
+    /* Headshot frame */
+    .page-hero-photo {
+      position: relative;
+      align-self: end;
+    }
+    .photo-frame {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+    }
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      top: -12px; left: 12px;
+      right: -12px; bottom: 12px;
+      border: 1px solid rgba(199,205,191,0.25);
+      z-index: 0;
+    }
+    .headshot {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    /* Placeholder until real photo added */
+    .headshot-placeholder {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #7a8268 0%, #595E48 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    .headshot-placeholder span {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,239,232,0.5);
+    }
+    /* Floating credential badge */
+    .credential-badge {
+      position: absolute;
+      bottom: 2rem;
+      right: -2rem;
+      background: var(--sand);
+      padding: 1.2rem 1.6rem;
+      z-index: 2;
+      box-shadow: 0 8px 32px rgba(44,44,42,0.15);
+    }
+    .badge-number {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--moss);
+      line-height: 1;
+      display: block;
+    }
+    .badge-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-top: 0.2rem;
+      display: block;
+    }
+
+    /* ─── SECTION SHELL ─── */
+    section { padding: clamp(4rem, 7vw, 7rem) var(--gutter); }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+
+    /* ─── STORY SECTION ─── */
+    .story { background: var(--sand); }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 7vw, 8rem);
+      align-items: start;
+    }
+    .story-body p {
+      color: var(--ink-light);
+      line-height: 1.9;
+      margin-bottom: 1.4rem;
+    }
+    .story-body p:last-child { margin-bottom: 0; }
+    .story-body strong { color: var(--ink); font-weight: 600; }
+
+    /* Pull quote inset */
+    .pull-quote {
+      border-left: 2px solid var(--mist);
+      padding: 1rem 0 1rem 1.8rem;
+      margin: 2rem 0;
+    }
+    .pull-quote p {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      font-style: italic;
+      color: var(--moss) !important;
+      line-height: 1.5 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* Timeline on the right */
+    .story-timeline { padding-top: 0.5rem; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 3.5rem 1fr;
+      gap: 1rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--mist);
+      position: relative;
+    }
+    .timeline-item:first-child { border-top: 1px solid var(--mist); }
+    .timeline-year {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--mist);
+      letter-spacing: 0.04em;
+      padding-top: 0.15rem;
+    }
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .timeline-desc {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+
+    /* ─── VALUES SECTION ─── */
+    .values { background: var(--parchment); }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(2rem, 4vw, 3.5rem);
+      margin-top: clamp(2.5rem, 4vw, 4rem);
+    }
+    .value-card { padding: 0; }
+    .value-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 1.2rem;
+      opacity: 0.6;
+    }
+    .value-title {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.7rem;
+    }
+    .value-desc {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+    }
+
+    /* ─── PERSONAL SECTION ─── */
+    .personal { background: var(--sand); }
+    .personal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: center;
+    }
+    .personal-images {
+      position: relative;
+      height: 520px;
+    }
+    .personal-img-main {
+      position: absolute;
+      top: 0; left: 0;
+      width: 75%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      background: linear-gradient(135deg, #b5bca8, #919682);
+      z-index: 1;
+    }
+    .personal-img-accent {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 55%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      background: linear-gradient(135deg, #8a9077, #595E48);
+      z-index: 2;
+      border: 6px solid var(--sand);
+    }
+    .personal-text {}
+    .personal-list {
+      list-style: none;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .personal-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--mist);
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+    .personal-list li:first-child { border-top: 1px solid var(--mist); }
+    .list-diamond {
+      color: var(--mist);
+      font-size: 0.5rem;
+      flex-shrink: 0;
+      position: relative;
+      top: -1px;
+    }
+
+    /* ─── CTA BAND ─── */
+    .cta-band {
+      background: var(--moss);
+      padding: clamp(3.5rem, 6vw, 6rem) var(--gutter);
+    }
+    .cta-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 400;
+      color: var(--sand);
+      line-height: 1.2;
+    }
+    .cta-sub {
+      color: rgba(199,205,191,0.7);
+      margin-top: 0.7rem;
+      font-size: 0.95rem;
+    }
+    .cta-buttons { display: flex; gap: 1rem; flex-shrink: 0; flex-wrap: wrap; }
+    .btn-sand {
+      padding: 1rem 2.2rem;
+      background: var(--sand);
+      color: var(--moss);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+    .btn-sand:hover { background: var(--mist); }
+    .btn-ghost-light {
+      padding: 1rem 2.2rem;
+      border: 1px solid rgba(245,239,232,0.35);
+      color: var(--sand);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .btn-ghost-light:hover { border-color: var(--sand); background: rgba(245,239,232,0.08); }
+
+    /* Arrow link */
+    .arrow-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--moss);
+      border-bottom: 1px solid var(--mist);
+      padding-bottom: 0.2rem;
+      transition: border-color 0.3s, gap 0.3s;
+    }
+    .arrow-link:hover { border-color: var(--moss); gap: 1rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #1e201a;
+      color: rgba(245,239,232,0.6);
+      padding: clamp(3rem, 5vw, 5rem) var(--gutter) 2rem;
+    }
+    .footer-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(245,239,232,0.08);
+    }
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--sand);
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+    .footer-tagline {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(245,239,232,0.4);
+      line-height: 1.7;
+      margin-bottom: 1.4rem;
+    }
+    .footer-contact a {
+      display: block;
+      font-size: 0.82rem;
+      color: rgba(245,239,232,0.55);
+      line-height: 1.9;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--mist); }
+    .footer-col-title {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,239,232,0.3);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.55rem; }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: rgba(245,239,232,0.55);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--mist); }
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin: 1.6rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: rgba(245,239,232,0.25);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ─── REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .page-hero-photo { display: none; }
+      .story-grid { grid-template-columns: 1fr; }
+      .story-timeline { border-top: 1px solid var(--mist); padding-top: 2rem; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .personal-grid { grid-template-columns: 1fr; }
+      .personal-images { display: none; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+      .credential-badge { display: none; }
+    }
+    @media (max-width: 600px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── MOBILE MENU ─── -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html" onclick="closeMobileMenu()">Home</a>
+  <a href="about.html" onclick="closeMobileMenu()">About</a>
+  <a href="services.html" onclick="closeMobileMenu()">Services</a>
+  <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
+  <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
+</nav>
+
+<!-- ─── NAV ─── -->
+<header id="siteHeader">
+  <nav aria-label="Main navigation">
+    <a href="index.html" class="nav-logo" aria-label="Outdoor Design Chick Home">
+      Outdoor Design Chick
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Start Your Project</a>
+    <button class="nav-toggle" onclick="openMobileMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ─── PAGE HERO ─── -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-text reveal">
+      <p class="page-eyebrow">Meet the Designer</p>
+      <h1 class="page-title">Built From the<br>Ground Up</h1>
+      <p class="page-subtitle">Meagen Lenhart has spent her career learning how outdoor spaces are actually built — so she can design them better than anyone else.</p>
+    </div>
+    <div class="page-hero-photo reveal">
+      <div class="photo-frame">
+        <!--
+          PHOTO: Replace the div below with your headshot:
+          <img class="headshot" src="meagen-headshot.jpg" alt="Meagen Lenhart, Founder of Outdoor Design Chick" />
+        -->
+        <div class="headshot-placeholder">
+          <span>Meagen Lenhart</span>
+        </div>
+        <div class="credential-badge">
+          <span class="badge-number">7+</span>
+          <span class="badge-label">Years in the Industry</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── STORY ─── -->
+<section class="story">
+  <div class="section-inner">
+    <div class="story-grid">
+
+      <div class="story-body reveal">
+        <p class="section-label">The Story</p>
+        <h2 class="section-title">From the Pool Deck<br>to the Design Studio</h2>
+
+        <p>Most designers will hand you a beautiful rendering and leave you to figure out the rest. Meagen Lenhart built her career doing it differently — starting at 17 years old on actual job sites, working for one of her best friend's family's pool companies and learning the trade from the inside out.</p>
+
+        <p>From there, she moved into project management with a luxury builder, where she developed a deep fluency in construction — materials, sequencing, contractor coordination, the details that make or break a finished space. That hands-on foundation is what separates Outdoor Design Chick from a typical design studio.</p>
+
+        <div class="pull-quote">
+          <p>"A lot of people can design something beautiful. I design things that are actually buildable — because I've been on the job site, and I know the difference."</p>
+        </div>
+
+        <p>In 2023, Meagen founded Outdoor Design Chick to fulfill her own vision: a boutique studio where every client gets the kind of personal attention, construction-informed design, and photorealistic 3D detail that turns a backyard into a true extension of the home.</p>
+
+        <p>Based in Phoenix and rooted in the desert, she designs with the Arizona climate in mind — spaces that are as beautiful in July as they are in January, and as livable as any room inside your house.</p>
+
+        <a href="contact.html" class="arrow-link">
+          Start a project with Meagen
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="story-timeline reveal">
+        <div class="timeline-item">
+          <span class="timeline-year">Age 17</span>
+          <div>
+            <h3 class="timeline-title">First Steps in the Pool Industry</h3>
+            <p class="timeline-desc">Started working with a family-owned pool company — learning job site operations, construction basics, and the art of building outdoor spaces from the ground up.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">Early Career</span>
+          <div>
+            <h3 class="timeline-title">Luxury Builder & Project Management</h3>
+            <p class="timeline-desc">Joined a high-end outdoor construction firm, managing projects from concept through completion. Developed deep expertise in materials, timelines, contractor relationships, and what makes a design actually work in the field.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2023</span>
+          <div>
+            <h3 class="timeline-title">Founded Outdoor Design Chick</h3>
+            <p class="timeline-desc">Launched her own studio in Phoenix with a clear mission: boutique, construction-informed outdoor design with photorealistic 3D visualization — for homeowners who want to see it before it's built.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">Today</span>
+          <div>
+            <h3 class="timeline-title">Designing Across the Arizona Valley</h3>
+            <p class="timeline-desc">Serving Phoenix, Scottsdale, Paradise Valley, and surrounding communities. Specializing in luxury new builds and full remodels — pools, landscape, and hardscape designed to live beautifully for decades.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── VALUES ─── -->
+<section class="values">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center; margin-bottom: clamp(2.5rem, 4vw, 4rem);">
+      <div class="divider" style="margin-bottom:2rem;">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M6 0L7.5 4.5L12 6L7.5 7.5L6 12L4.5 7.5L0 6L4.5 4.5Z" fill="#C7CDBF"/>
+        </svg>
+      </div>
+      <p class="section-label" style="justify-content:center; display:flex;">The Outdoor Design Chick Difference</p>
+      <h2 class="section-title" style="max-width:500px; margin: 0 auto;">How I Approach Every Project</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <svg class="value-icon" viewBox="0 0 36 36" fill="none" stroke="#595E48" stroke-width="1.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="4" y="4" width="28" height="28" rx="1"/>
+          <path d="M4 14 L32 14 M14 4 L14 32"/>
+          <circle cx="23" cy="23" r="4"/>
+        </svg>
+        <h3 class="value-title">Design That's Built to Be Built</h3>
+        <p class="value-desc">Every line in my drawings reflects real construction knowledge. I design with contractors in mind — no surprises in the field, no costly changes mid-build, no gap between what you saw in the rendering and what ends up in your backyard.</p>
+      </div>
+      <div class="value-card reveal">
+        <svg class="value-icon" viewBox="0 0 36 36" fill="none" stroke="#595E48" stroke-width="1.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="13"/>
+          <path d="M18 10 L18 18 L24 22"/>
+        </svg>
+        <h3 class="value-title">See It Before It's Built</h3>
+        <p class="value-desc">Photorealistic 3D renderings aren't a luxury add-on — they're central to how I work. You'll walk through your finished space virtually before a single permit is filed, so every decision is made with confidence.</p>
+      </div>
+      <div class="value-card reveal">
+        <svg class="value-icon" viewBox="0 0 36 36" fill="none" stroke="#595E48" stroke-width="1.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="12" r="5"/>
+          <path d="M8 32 Q8 22 18 22 Q28 22 28 32"/>
+          <path d="M26 8 Q30 10 30 14 Q30 18 26 19"/>
+        </svg>
+        <h3 class="value-title">One Designer, Start to Finish</h3>
+        <p class="value-desc">You work directly with Meagen — not an account manager, not a junior draftsperson. From the first conversation through construction liaison, your project stays in the same hands that designed it.</p>
+      </div>
+      <div class="value-card reveal">
+        <svg class="value-icon" viewBox="0 0 36 36" fill="none" stroke="#595E48" stroke-width="1.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 30 Q18 6 30 30Z"/>
+          <path d="M11 22 Q18 12 25 22"/>
+          <circle cx="18" cy="26" r="2"/>
+        </svg>
+        <h3 class="value-title">Rooted in the Desert</h3>
+        <p class="value-desc">Phoenix isn't just where the studio is based — it's where Meagen lives, raises her family, and understands the land. Every design honors the climate, the light, and the natural beauty of Arizona.</p>
+      </div>
+      <div class="value-card reveal">
+        <svg class="value-icon" viewBox="0 0 36 36" fill="none" stroke="#595E48" stroke-width="1.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="5" y="8" width="26" height="20" rx="1"/>
+          <path d="M5 15 L31 15 M13 8 L13 28"/>
+          <path d="M18 19 L22 23 M18 23 L22 19" stroke-width="1"/>
+        </svg>
+        <h3 class="value-title">HOA & Permit Ready</h3>
+        <p class="value-desc">Meagen handles the documentation — construction plans, HOA submissions, city permit applications. Your project is set up to move forward without the delays that derail most outdoor builds.</p>
+      </div>
+      <div class="value-card reveal">
+        <svg class="value-icon" viewBox="0 0 36 36" fill="none" stroke="#595E48" stroke-width="1.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 28 L8 14 L18 6 L28 14 L28 28 Z"/>
+          <path d="M14 28 L14 20 L22 20 L22 28"/>
+        </svg>
+        <h3 class="value-title">Indoor–Outdoor as One</h3>
+        <p class="value-desc">The best outdoor spaces don't feel like afterthoughts — they feel like another room. Meagen designs with your home's architecture, interior palette, and lifestyle at the center, so everything connects.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PERSONAL ─── -->
+<section class="personal">
+  <div class="section-inner">
+    <div class="personal-grid">
+      <div class="personal-images reveal" aria-hidden="true">
+        <!--
+          PHOTOS: Replace divs with images:
+          <img class="personal-img-main" src="lifestyle-1.jpg" alt="" />
+          <img class="personal-img-accent" src="lifestyle-2.jpg" alt="" />
+        -->
+        <div class="personal-img-main"></div>
+        <div class="personal-img-accent"></div>
+      </div>
+      <div class="personal-text reveal">
+        <p class="section-label">Beyond the Studio</p>
+        <h2 class="section-title">A Phoenix Original</h2>
+        <p style="color: var(--ink-light); line-height: 1.9; margin-bottom: 1rem;">
+          When Meagen isn't designing backyards, she's living in one. As a Phoenix native, mom, and someone who genuinely loves the way desert light falls across a limestone patio at dusk, her work is personal in the truest sense.
+        </p>
+        <p style="color: var(--ink-light); line-height: 1.9;">
+          She started Outdoor Design Chick because she saw a gap — beautiful design that wasn't grounded in how things actually get built, or builders who could execute but couldn't envision. She's both, and she built a studio around it.
+        </p>
+        <ul class="personal-list">
+          <li>
+            <span class="list-diamond">◆</span>
+            Phoenix native with deep roots in the Arizona Valley
+          </li>
+          <li>
+            <span class="list-diamond">◆</span>
+            Mom — which means she designs for how families actually live outdoors
+          </li>
+          <li>
+            <span class="list-diamond">◆</span>
+            Passionate about luxury living that feels warm, not cold
+          </li>
+          <li>
+            <span class="list-diamond">◆</span>
+            Believer that the desert is the most beautiful canvas there is
+          </li>
+        </ul>
+        <a href="contact.html" class="arrow-link">
+          Let's work together
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA BAND ─── -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <div class="reveal">
+      <h2 class="cta-title">Ready to Design<br>Your Outdoor Living Space?</h2>
+      <p class="cta-sub">Serving Phoenix, Scottsdale, Paradise Valley, and the greater Arizona Valley.</p>
+    </div>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn-sand">Get in Touch</a>
+      <a href="tel:6028856917" class="btn-ghost-light">Call 602-885-6917</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-name">Outdoor Design Chick</p>
+      <p class="footer-tagline">Blurring the lines between<br>indoor and outdoor living.</p>
+      <div class="footer-contact">
+        <a href="tel:6028856917">602-885-6917</a>
+        <a href="mailto:meagen@outdoordesignchick.com">meagen@outdoordesignchick.com</a>
+        <span style="font-size:0.82rem; color:rgba(245,239,232,0.55);">Phoenix, Arizona</span>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Pages</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Services</p>
+      <ul class="footer-links">
+        <li><a href="services.html">Pool Design</a></li>
+        <li><a href="services.html">Landscape Design</a></li>
+        <li><a href="services.html">Hardscape Design</a></li>
+        <li><a href="services.html">3D Renderings</a></li>
+        <li><a href="services.html">Construction Plans</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Follow Along</p>
+      <ul class="footer-links">
+        <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Houzz</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Pinterest</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Outdoor Design Chick · Phoenix, AZ</span>
+    <span>Design by Outdoor Design Chick</span>
+  </div>
+</footer>
+
+<script>
+  function openMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), idx * 90);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
