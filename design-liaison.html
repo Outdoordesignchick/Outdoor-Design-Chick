@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Liaison — Outdoor Design Chick</title>
+  <meta name="description" content="Design liaison services for luxury outdoor construction in Phoenix, AZ. Meagen stays engaged through your build — on-site when needed, always reachable — so what gets built matches what was designed." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /*
+    @font-face {
+      font-family: 'Garet';
+      src: url('garet.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    */
+
+    :root {
+      --sand:      #F5EFE8;
+      --sage:      #919682;
+      --mist:      #C7CDBF;
+      --moss:      #595E48;
+      --ink:       #2C2C2A;
+      --ink-light: #5a5a57;
+      --parchment: #EDE8E0;
+
+      --font-display: 'Playfair Display SC', Georgia, serif;
+      --font-body:    'Garet', 'DM Sans', 'Inter', system-ui, sans-serif;
+      --max-w: 1280px;
+      --gutter: clamp(1.5rem, 5vw, 4rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font: inherit; border: none; background: none; }
+
+    body {
+      background: var(--sand);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      display: flex; align-items: center;
+      gap: 1rem; margin: 0 auto; width: fit-content;
+    }
+    .divider::before, .divider::after {
+      content: ''; display: block;
+      width: clamp(60px, 8vw, 120px);
+      height: 1px; background: var(--mist);
+    }
+
+    /* ─── NAV ─── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(245,239,232,0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 var(--mist);
+    }
+    nav {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 1.4rem var(--gutter);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      letter-spacing: 0.08em; color: var(--moss); line-height: 1.3;
+    }
+    .nav-links { display: flex; gap: clamp(1.5rem, 3vw, 2.5rem); list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-light); transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--moss); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 0.35rem; }
+    .nav-dropdown > a svg { transition: transform 0.3s; }
+    .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+    .dropdown-menu {
+      position: absolute; top: calc(100% + 1rem); left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: rgba(245,239,232,0.98); backdrop-filter: blur(12px);
+      border: 1px solid var(--mist); min-width: 210px;
+      padding: 0.5rem 0; opacity: 0; visibility: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 200; box-shadow: 0 12px 40px rgba(44,44,42,0.1);
+    }
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+    }
+    .dropdown-menu::before {
+      content: ''; position: absolute; top: -5px; left: 50%;
+      transform: translateX(-50%) rotate(45deg); width: 9px; height: 9px;
+      background: rgba(245,239,232,0.98);
+      border-top: 1px solid var(--mist); border-left: 1px solid var(--mist);
+    }
+    .dropdown-menu a {
+      display: block; padding: 0.8rem 1.4rem;
+      font-size: 0.78rem !important; letter-spacing: 0.12em !important;
+      text-transform: uppercase; color: var(--ink-light) !important;
+      transition: color 0.2s, background 0.2s; white-space: nowrap;
+    }
+    .dropdown-menu a:hover, .dropdown-menu a.active {
+      color: var(--moss) !important; background: rgba(89,94,72,0.05);
+    }
+    .dropdown-divider { height: 1px; background: var(--mist); margin: 0.4rem 1.4rem; }
+    .nav-cta {
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.6rem 1.4rem; border: 1px solid var(--moss); color: var(--moss); transition: all 0.3s;
+    }
+    .nav-cta:hover { background: var(--moss); color: var(--sand); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 1.5px; background: var(--moss); }
+
+    /* ─── MOBILE MENU ─── */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: rgba(89,94,72,0.97); z-index: 99;
+      padding: 6rem var(--gutter) 3rem; flex-direction: column; gap: 0.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display); font-size: clamp(1.6rem, 5vw, 2.2rem);
+      color: var(--sand); padding: 0.8rem 0; border-bottom: 1px solid rgba(245,239,232,0.1);
+    }
+    .mobile-close { position: absolute; top: 1.6rem; right: var(--gutter); color: var(--sand); font-size: 1.5rem; }
+
+    /* ─── BUTTONS ─── */
+    .btn-sand {
+      padding: 1rem 2.2rem; background: var(--sand); color: var(--moss);
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: background 0.3s; white-space: nowrap; display: inline-block;
+    }
+    .btn-sand:hover { background: var(--mist); }
+    .btn-ghost-light {
+      padding: 1rem 2.2rem; border: 1px solid rgba(245,239,232,0.35);
+      color: var(--sand); font-size: 0.8rem; letter-spacing: 0.12em;
+      text-transform: uppercase; transition: all 0.3s; white-space: nowrap; display: inline-block;
+    }
+    .btn-ghost-light:hover { border-color: var(--sand); background: rgba(245,239,232,0.08); }
+
+    /* Arrow link */
+    .arrow-link {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--moss); border-bottom: 1px solid var(--mist);
+      padding-bottom: 0.2rem; transition: border-color 0.3s, gap 0.3s;
+    }
+    .arrow-link:hover { border-color: var(--moss); gap: 1rem; }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      padding-top: 5.5rem; background: var(--moss);
+      position: relative; overflow: hidden; min-height: 75vh;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero-botanical {
+      position: absolute; bottom: 0; right: 0;
+      width: clamp(180px, 28vw, 380px); opacity: 0.1; pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: clamp(3rem, 6vw, 6rem) var(--gutter);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem); align-items: center;
+    }
+    .page-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--mist); margin-bottom: 1.2rem;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 400; color: var(--sand); line-height: 1.1; margin-bottom: 1.4rem;
+    }
+    .page-subtitle {
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: rgba(199,205,191,0.8); line-height: 1.8; max-width: 46ch; margin-bottom: 2rem;
+    }
+    .hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* Hero right: visual problem/solution cards */
+    .problem-solution { display: flex; flex-direction: column; gap: 1px; }
+    .ps-card {
+      padding: 1.6rem 2rem;
+      border: 1px solid rgba(199,205,191,0.14);
+      display: flex; gap: 1.2rem; align-items: flex-start;
+    }
+    .ps-card.problem { background: rgba(44,44,42,0.3); }
+    .ps-card.solution { background: rgba(245,239,232,0.07); }
+    .ps-badge {
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0.25rem 0.6rem; flex-shrink: 0; margin-top: 0.2rem; white-space: nowrap;
+    }
+    .ps-card.problem .ps-badge { background: rgba(145,150,130,0.2); color: var(--sage); }
+    .ps-card.solution .ps-badge { background: rgba(199,205,191,0.15); color: var(--mist); }
+    .ps-text-title {
+      font-family: var(--font-display); font-size: 0.9rem;
+      color: var(--sand); margin-bottom: 0.3rem; font-weight: 400;
+    }
+    .ps-text-desc { font-size: 0.82rem; color: rgba(199,205,191,0.65); line-height: 1.65; }
+
+    /* ─── SECTION SHELL ─── */
+    section { padding: clamp(4rem, 7vw, 7rem) var(--gutter); }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400; line-height: 1.2; color: var(--ink); margin-bottom: 1.4rem;
+    }
+
+    /* ─── WHAT IT MEANS ─── */
+    .what-it-means { background: var(--sand); }
+    .meaning-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 7vw, 8rem); align-items: center;
+    }
+    .meaning-body p { color: var(--ink-light); line-height: 1.9; margin-bottom: 1.3rem; }
+    .meaning-body p:last-child { margin-bottom: 0; }
+    .meaning-body strong { color: var(--ink); font-weight: 600; }
+    .pull-quote {
+      border-left: 2px solid var(--mist);
+      padding: 0.8rem 0 0.8rem 1.8rem; margin: 1.8rem 0;
+    }
+    .pull-quote p {
+      font-family: var(--font-display); font-size: clamp(1rem, 1.6vw, 1.3rem);
+      font-style: italic; color: var(--moss); line-height: 1.5;
+    }
+
+    /* Visual: on-site illustration */
+    .onsite-visual {
+      position: relative;
+    }
+    .onsite-visual::before {
+      content: ''; position: absolute;
+      top: -14px; left: 14px; right: -14px; bottom: 14px;
+      border: 1px solid var(--mist); z-index: 0;
+    }
+    .onsite-photo {
+      position: relative; z-index: 1;
+      width: 100%; aspect-ratio: 4/5;
+      object-fit: cover; object-position: center;
+      background: linear-gradient(160deg, #8a9077, #595E48);
+      display: block;
+    }
+    .onsite-badge {
+      position: absolute; bottom: 2rem; left: -1.5rem; z-index: 2;
+      background: var(--sand); padding: 1.1rem 1.5rem;
+      box-shadow: 0 8px 32px rgba(44,44,42,0.12);
+    }
+    .onsite-badge-title {
+      font-family: var(--font-display); font-size: 1.1rem;
+      color: var(--moss); line-height: 1; margin-bottom: 0.2rem;
+    }
+    .onsite-badge-sub {
+      font-size: 0.68rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--sage);
+    }
+    /*
+      PHOTO: Replace .onsite-photo div with:
+      <img class="onsite-photo" src="meagen-onsite.jpg" alt="Meagen on a job site" />
+    */
+
+    /* ─── WHAT MEAGEN DOES ─── */
+    .what-meagen { background: var(--parchment); }
+    .wm-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 5vw, 6rem); align-items: end;
+      margin-bottom: clamp(3rem, 5vw, 5rem);
+    }
+    .wm-sub { color: var(--ink-light); line-height: 1.85; }
+    .wm-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--mist);
+    }
+    .wm-card {
+      background: var(--parchment); padding: clamp(1.8rem, 3vw, 2.6rem);
+      display: flex; flex-direction: column; gap: 1rem; transition: background 0.3s;
+    }
+    .wm-card:hover { background: #e4dfd6; }
+    .wm-icon { width: 30px; height: 30px; opacity: 0.55; }
+    .wm-num { font-family: var(--font-display); font-size: 0.8rem; color: var(--mist); }
+    .wm-title {
+      font-family: var(--font-display); font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+      font-weight: 400; color: var(--ink); line-height: 1.3;
+    }
+    .wm-desc { font-size: 0.88rem; color: var(--ink-light); line-height: 1.85; flex: 1; }
+
+    /* ─── PROBLEMS PREVENTED ─── */
+    .problems { background: var(--moss); }
+    .problems .section-label { color: var(--mist); }
+    .problems .section-title { color: var(--sand); }
+    .problems-sub { color: rgba(199,205,191,0.75); max-width: 50ch; line-height: 1.85; margin-bottom: clamp(2.5rem, 4vw, 4rem); }
+    .problems-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .problem-card {
+      padding: 2rem; border: 1px solid rgba(199,205,191,0.12); position: relative;
+    }
+    .problem-icon-wrap {
+      width: 44px; height: 44px; border: 1px solid rgba(199,205,191,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .problem-icon { width: 22px; height: 22px; opacity: 0.6; }
+    .problem-title {
+      font-family: var(--font-display); font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+      color: var(--sand); font-weight: 400; margin-bottom: 0.6rem; line-height: 1.3;
+    }
+    .problem-desc { font-size: 0.86rem; color: rgba(199,205,191,0.65); line-height: 1.8; }
+
+    /* ─── HOW IT WORKS (availability) ─── */
+    .availability { background: var(--sand); }
+    .avail-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 5rem);
+      margin-top: clamp(2.5rem, 4vw, 4rem);
+    }
+    .avail-card {
+      padding: 2.4rem; border: 1px solid var(--mist); position: relative; transition: border-color 0.3s;
+    }
+    .avail-card:hover { border-color: var(--sage); }
+    .avail-tag {
+      display: inline-block; font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--sand); background: var(--moss);
+      padding: 0.3rem 0.8rem; margin-bottom: 1.2rem;
+    }
+    .avail-title {
+      font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+      font-weight: 400; color: var(--ink); margin-bottom: 0.8rem; line-height: 1.2;
+    }
+    .avail-desc { font-size: 0.9rem; color: var(--ink-light); line-height: 1.85; }
+    .avail-list { list-style: none; margin-top: 1.4rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .avail-list li {
+      display: flex; align-items: baseline; gap: 0.8rem;
+      font-size: 0.88rem; color: var(--ink-light);
+    }
+    .avail-list li::before { content: '◆'; font-size: 0.4rem; color: var(--mist); flex-shrink: 0; }
+
+    /* ─── WHO NEEDS IT ─── */
+    .who-needs { background: var(--parchment); }
+    .who-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--mist);
+      margin-top: clamp(2.5rem, 4vw, 4rem);
+    }
+    .who-block {
+      background: var(--parchment); padding: 2rem 2.2rem;
+      display: flex; flex-direction: column; gap: 0.8rem; transition: background 0.3s;
+    }
+    .who-block:hover { background: #e4dfd6; }
+    .who-num { font-family: var(--font-display); font-size: 0.8rem; color: var(--mist); }
+    .who-title {
+      font-family: var(--font-display); font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      font-weight: 400; color: var(--ink); line-height: 1.3;
+    }
+    .who-desc { font-size: 0.87rem; color: var(--ink-light); line-height: 1.82; }
+
+    /* ─── STANDALONE OR BUNDLED ─── */
+    .bundled { background: var(--sand); }
+    .bundled-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 4rem);
+      margin-top: clamp(2.5rem, 4vw, 4rem);
+    }
+    .bundle-option {
+      padding: 2.4rem; border: 1px solid var(--mist); transition: border-color 0.3s;
+    }
+    .bundle-option:hover { border-color: var(--sage); }
+    .bundle-option.featured {
+      border-color: var(--moss); background: rgba(89,94,72,0.03);
+    }
+    .bundle-tag {
+      display: inline-block; font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; padding: 0.3rem 0.8rem; margin-bottom: 1.2rem;
+    }
+    .bundle-option .bundle-tag { color: var(--sage); background: rgba(145,150,130,0.1); }
+    .bundle-option.featured .bundle-tag { color: var(--sand); background: var(--moss); }
+    .bundle-title {
+      font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+      font-weight: 400; color: var(--ink); margin-bottom: 0.8rem; line-height: 1.2;
+    }
+    .bundle-desc { font-size: 0.9rem; color: var(--ink-light); line-height: 1.85; }
+    .bundle-includes {
+      list-style: none; margin-top: 1.4rem;
+      padding-top: 1.4rem; border-top: 1px solid var(--mist);
+      display: flex; flex-direction: column; gap: 0.55rem;
+    }
+    .bundle-includes li {
+      display: flex; align-items: baseline; gap: 0.8rem;
+      font-size: 0.86rem; color: var(--ink-light);
+    }
+    .bundle-includes li::before { content: '◆'; font-size: 0.4rem; color: var(--mist); flex-shrink: 0; }
+    .bundle-cta { margin-top: 1.8rem; }
+
+    /* ─── QUOTE BAND ─── */
+    .quote-band {
+      background: var(--parchment); padding: clamp(3.5rem, 6vw, 6rem) var(--gutter); text-align: center;
+    }
+    .quote-text {
+      font-family: var(--font-display); font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+      font-weight: 400; font-style: italic; color: var(--moss);
+      max-width: 720px; margin: 1.5rem auto; line-height: 1.45;
+    }
+    .quote-attr { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); }
+
+    /* ─── CTA BAND ─── */
+    .cta-band { background: var(--moss); padding: clamp(3.5rem, 6vw, 6rem) var(--gutter); }
+    .cta-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+    }
+    .cta-title {
+      font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 400; color: var(--sand); line-height: 1.2;
+    }
+    .cta-sub { color: rgba(199,205,191,0.7); margin-top: 0.7rem; font-size: 0.95rem; }
+    .cta-buttons { display: flex; gap: 1rem; flex-shrink: 0; flex-wrap: wrap; }
+
+    /* ─── FOOTER ─── */
+    footer { background: #1e201a; color: rgba(245,239,232,0.6); padding: clamp(3rem, 5vw, 5rem) var(--gutter) 2rem; }
+    .footer-grid {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 4rem); padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(245,239,232,0.08);
+    }
+    .footer-brand-name { font-family: var(--font-display); font-size: 1rem; color: var(--sand); letter-spacing: 0.06em; margin-bottom: 1rem; }
+    .footer-tagline { font-size: 0.85rem; font-style: italic; color: rgba(245,239,232,0.4); line-height: 1.7; margin-bottom: 1.4rem; }
+    .footer-contact a { display: block; font-size: 0.82rem; color: rgba(245,239,232,0.55); line-height: 1.9; transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--mist); }
+    .footer-col-title { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,239,232,0.3); margin-bottom: 1.2rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.55rem; }
+    .footer-links a { font-size: 0.85rem; color: rgba(245,239,232,0.55); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--mist); }
+    .footer-bottom { max-width: var(--max-w); margin: 1.6rem auto 0; display: flex; justify-content: space-between; font-size: 0.72rem; color: rgba(245,239,232,0.25); flex-wrap: wrap; gap: 0.5rem; }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .meaning-grid { grid-template-columns: 1fr; }
+      .onsite-visual { display: none; }
+      .wm-header { grid-template-columns: 1fr; }
+      .wm-grid { grid-template-columns: 1fr 1fr; }
+      .problems-grid { grid-template-columns: 1fr 1fr; }
+      .avail-grid { grid-template-columns: 1fr; }
+      .who-row { grid-template-columns: 1fr 1fr; }
+      .bundled-grid { grid-template-columns: 1fr; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .wm-grid { grid-template-columns: 1fr; }
+      .problems-grid { grid-template-columns: 1fr; }
+      .who-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── MOBILE MENU ─── -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html" onclick="closeMobileMenu()">Home</a>
+  <a href="about.html" onclick="closeMobileMenu()">About Me</a>
+  <a href="services.html" onclick="closeMobileMenu()">Services</a>
+  <a href="3d-design.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— 3D Design</a>
+  <a href="construction-plans.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— Construction Plans</a>
+  <a href="design-liaison.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6);">— Design Liaison</a>
+  <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
+  <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
+</nav>
+
+<!-- ─── NAV ─── -->
+<header>
+  <nav aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">Outdoor Design Chick</a>
+    <ul class="nav-links">
+      <li><a href="about.html">About Me</a></li>
+      <li class="nav-dropdown">
+        <a href="services.html" class="active">
+          Services
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+            <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="dropdown-menu">
+          <a href="3d-design.html">3D Design</a>
+          <div class="dropdown-divider"></div>
+          <a href="construction-plans.html">Construction Plans</a>
+          <div class="dropdown-divider"></div>
+          <a href="design-liaison.html" class="active">Design Liaison</a>
+        </div>
+      </li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Start Your Project</a>
+    <button class="nav-toggle" onclick="openMobileMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ─── PAGE HERO ─── -->
+<div class="page-hero">
+  <svg class="hero-botanical" viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M150 480 L150 120" stroke="#F5EFE8" stroke-width="1.4"/>
+    <path d="M138 480 L138 120" stroke="#F5EFE8" stroke-width="1.4"/>
+    <path d="M138 120 C138 100 162 100 162 120" stroke="#F5EFE8" stroke-width="1.4" fill="none"/>
+    <line x1="144" y1="480" x2="144" y2="124" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <line x1="150" y1="480" x2="150" y2="102" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <line x1="156" y1="480" x2="156" y2="124" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <path d="M138 300 C122 298 110 286 104 268 C98 250 98 228 98 210 L98 175 C98 164 103 158 110 158 C117 158 122 164 122 175 L122 210 C122 222 130 230 138 234" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M98 175 C98 162 122 162 122 175" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M162 265 C178 262 190 250 196 232 C202 214 202 192 202 174 L202 139 C202 128 197 122 190 122 C183 122 178 128 178 139 L178 174 C178 186 170 194 162 198" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M178 139 C178 126 202 126 202 139" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+  </svg>
+
+  <div class="page-hero-inner">
+    <div class="reveal">
+      <p class="page-eyebrow">Services · Design Liaison</p>
+      <h1 class="page-title">Your Design,<br>Protected Through<br>Every Phase</h1>
+      <p class="page-subtitle">Most projects drift between design and build. Meagen stays in — on-site when it counts, always reachable — making sure what gets built is exactly what was designed.</p>
+      <div class="hero-cta-row">
+        <a href="contact.html" class="btn-sand">Talk to Meagen</a>
+        <a href="#what-meagen-does" class="btn-ghost-light">See What's Included</a>
+      </div>
+    </div>
+
+    <!-- Problem / Solution cards -->
+    <div class="problem-solution reveal">
+      <div class="ps-card problem">
+        <span class="ps-badge">Without Liaison</span>
+        <div>
+          <p class="ps-text-title">Contractor interprets the design their own way</p>
+          <p class="ps-text-desc">Questions go unanswered. Substitutions get made. By the time you notice, it's already built.</p>
+        </div>
+      </div>
+      <div class="ps-card problem">
+        <span class="ps-badge">Without Liaison</span>
+        <div>
+          <p class="ps-text-title">Mid-build indecision costs real money</p>
+          <p class="ps-text-desc">Without a design advocate on call, client changes happen late — when they're most expensive.</p>
+        </div>
+      </div>
+      <div class="ps-card problem">
+        <span class="ps-badge">Without Liaison</span>
+        <div>
+          <p class="ps-text-title">The finished space doesn't match the vision</p>
+          <p class="ps-text-desc">The gap between what was designed and what gets built is where most outdoor projects disappoint.</p>
+        </div>
+      </div>
+      <div class="ps-card solution">
+        <span class="ps-badge">With Meagen</span>
+        <div>
+          <p class="ps-text-title">One person who knows the design — and stays in</p>
+          <p class="ps-text-desc">Meagen is the bridge between your vision and your contractor, from first pour to final walkthrough.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── WHAT IT MEANS ─── -->
+<section class="what-it-means">
+  <div class="section-inner">
+    <div class="meaning-grid">
+      <div class="meaning-body reveal">
+        <p class="section-label">What Design Liaison Means</p>
+        <h2 class="section-title">The Person Who Keeps<br>Your Project Honest</h2>
+        <p>Design liaison is a simple idea with a big impact: having someone who deeply understands your design stay engaged through the construction process. Not as a project manager, not as a contractor — as your design advocate.</p>
+        <p>Meagen built her career on construction sites before she ever opened a design studio. She knows how contractors think, where interpretations get made, and what questions need to be answered in the field before they become expensive problems.</p>
+        <div class="pull-quote">
+          <p>"I've seen too many beautiful designs get lost in translation between the drawing and the dig. I stay in to make sure that doesn't happen to you."</p>
+        </div>
+        <p>Whether you've worked with Meagen from the beginning or you're coming to her mid-project, design liaison keeps your vision intact all the way to the finished space.</p>
+        <a href="contact.html" class="arrow-link" style="margin-top:1.5rem;">
+          Ask Meagen about liaison for your project
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="onsite-visual reveal">
+        <!--
+          PHOTO: Replace .onsite-photo div with:
+          <img class="onsite-photo" src="meagen-onsite.jpg" alt="Meagen Lenhart reviewing plans on site" />
+        -->
+        <div class="onsite-photo"></div>
+        <div class="onsite-badge">
+          <p class="onsite-badge-title">On-Site &amp; On-Call</p>
+          <p class="onsite-badge-sub">Phoenix &amp; the Arizona Valley</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHAT MEAGEN DOES ─── -->
+<section class="what-meagen" id="what-meagen-does">
+  <div class="section-inner">
+    <div class="wm-header">
+      <div class="reveal">
+        <p class="section-label">What's Included</p>
+        <h2 class="section-title">Design Liaison<br>in Practice</h2>
+      </div>
+      <p class="wm-sub reveal">From the first contractor walkthrough to the final punch list, Meagen is reachable, responsive, and ready to protect the integrity of your design at every stage.</p>
+    </div>
+    <div class="wm-grid">
+      <div class="wm-card reveal">
+        <span class="wm-num">01</span>
+        <svg class="wm-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M5 25 L5 8 L15 3 L25 8 L25 25 Z"/>
+          <path d="M5 14 L25 14 M15 3 L15 25"/>
+        </svg>
+        <h3 class="wm-title">Pre-Construction Walkthrough</h3>
+        <p class="wm-desc">Meagen walks the site with your contractor before work begins — reviewing the plans together, clarifying design intent, and flagging anything that needs to be resolved before the first shovel goes in.</p>
+      </div>
+      <div class="wm-card reveal">
+        <span class="wm-num">02</span>
+        <svg class="wm-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="15" cy="10" r="5"/>
+          <path d="M8 26 Q8 18 15 18 Q22 18 22 26"/>
+          <path d="M22 7 L26 9 M22 10 L26 10"/>
+        </svg>
+        <h3 class="wm-title">Contractor Communication</h3>
+        <p class="wm-desc">Questions that come up mid-build don't have to wait. Meagen is the direct line between your contractor's field questions and a design-informed answer — so work doesn't stall and improvisation doesn't happen.</p>
+      </div>
+      <div class="wm-card reveal">
+        <span class="wm-num">03</span>
+        <svg class="wm-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="4" y="5" width="22" height="20" rx="1"/>
+          <path d="M4 12 L26 12"/>
+          <path d="M9 8 L9 5 M15 8 L15 5 M21 8 L21 5"/>
+          <path d="M8 17 L22 17 M8 21 L18 21"/>
+        </svg>
+        <h3 class="wm-title">Site Visits When Needed</h3>
+        <p class="wm-desc">For key construction milestones — pool shell review, hardscape layout confirmation, structure framing — Meagen visits in person to verify the build is tracking true to the design before it's too late to adjust.</p>
+      </div>
+      <div class="wm-card reveal">
+        <span class="wm-num">04</span>
+        <svg class="wm-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M5 25 L15 5 L25 25 Z"/>
+          <path d="M10 18 L20 18"/>
+          <circle cx="15" cy="22" r="1.5" fill="#595E48" opacity="0.5"/>
+        </svg>
+        <h3 class="wm-title">Material & Substitution Review</h3>
+        <p class="wm-desc">When a contractor proposes a material substitution — because something is unavailable, backordered, or over budget — Meagen evaluates the alternative against the design intent before it gets approved or rejected.</p>
+      </div>
+      <div class="wm-card reveal">
+        <span class="wm-num">05</span>
+        <svg class="wm-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="15" cy="15" r="10"/>
+          <path d="M15 9 L15 15 L20 18"/>
+        </svg>
+        <h3 class="wm-title">Client Decision Support</h3>
+        <p class="wm-desc">Mid-build decisions feel different when you're standing in a half-finished backyard. Meagen helps clients make confident, design-aligned choices in the moment — without the costly second-guessing that derails timelines.</p>
+      </div>
+      <div class="wm-card reveal">
+        <span class="wm-num">06</span>
+        <svg class="wm-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="15" cy="15" r="10"/>
+          <path d="M10 15 L13 18 L20 11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3 class="wm-title">Final Walkthrough & Sign-Off</h3>
+        <p class="wm-desc">At project completion, Meagen walks the finished space against the original design — confirming materials, finishes, and details are all where they should be before you accept the build.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROBLEMS PREVENTED ─── -->
+<section class="problems">
+  <div class="section-inner">
+    <p class="section-label">Why It Matters</p>
+    <h2 class="section-title">Three Problems<br>Design Liaison Prevents</h2>
+    <p class="problems-sub">Every one of these happens on outdoor builds without a design advocate. None of them have to happen on yours.</p>
+    <div class="problems-grid">
+      <div class="problem-card reveal">
+        <div class="problem-icon-wrap">
+          <svg class="problem-icon" viewBox="0 0 22 22" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 18 L4 8 L11 3 L18 8 L18 18 Z"/>
+            <path d="M8 18 L8 13 L14 13 L14 18"/>
+            <path d="M11 3 L11 13"/>
+          </svg>
+        </div>
+        <h3 class="problem-title">Contractor Misreads the Design</h3>
+        <p class="problem-desc">Plans get interpreted. Contractors make judgment calls. Without someone who knows the design inside and out available to answer in real time, those calls don't always go the right way. A coping material gets swapped. A pool wall ends up six inches off. A pergola beam is set too low. Small deviations become permanent features.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon-wrap">
+          <svg class="problem-icon" viewBox="0 0 22 22" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="5" width="16" height="14" rx="1"/>
+            <path d="M3 10 L19 10"/>
+            <path d="M7 3 L7 7 M15 3 L15 7"/>
+            <path d="M7 14 L15 14"/>
+          </svg>
+        </div>
+        <h3 class="problem-title">Late Changes Blow the Budget</h3>
+        <p class="problem-desc">Client indecision mid-build is one of the most common causes of cost overruns. Without a design expert available to help evaluate options quickly, decisions get delayed or made poorly — and change orders pile up. Meagen keeps choices grounded in the design so you move forward instead of backward.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon-wrap">
+          <svg class="problem-icon" viewBox="0 0 22 22" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M8 11 L10 13 L14 9" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="problem-title">The Finished Space Misses the Mark</h3>
+        <p class="problem-desc">The most expensive version of this problem is also the most heartbreaking — a finished backyard that doesn't feel like what you signed up for. The pool shape feels off. The paving pattern isn't quite right. The plants aren't what you imagined. Design liaison closes the gap between the vision and the reality.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW MEAGEN IS AVAILABLE ─── -->
+<section class="availability">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">How It Works</p>
+      <h2 class="section-title">On-Site When It Counts —<br>Always Reachable</h2>
+    </div>
+    <div class="avail-grid">
+      <div class="avail-card reveal">
+        <span class="avail-tag">In Person</span>
+        <h3 class="avail-title">Site Visits at Key Milestones</h3>
+        <p class="avail-desc">For the moments that matter most, Meagen comes to you. In-person visits are scheduled at critical construction phases to verify the build is on track and catch anything that needs correction before it's set in stone.</p>
+        <ul class="avail-list">
+          <li>Pre-construction contractor walkthrough</li>
+          <li>Pool shell and layout review</li>
+          <li>Hardscape and structure framing confirmation</li>
+          <li>Final completion walkthrough and sign-off</li>
+        </ul>
+      </div>
+      <div class="avail-card reveal">
+        <span class="avail-tag">Remote</span>
+        <h3 class="avail-title">Always Reachable Between Visits</h3>
+        <p class="avail-desc">Construction doesn't pause between site visits — and neither does Meagen. Phone, text, and email access means your contractor's questions get answered fast, and you always have a design expert available when you need one.</p>
+        <ul class="avail-list">
+          <li>Contractor questions answered same day</li>
+          <li>Material substitution reviews via photo</li>
+          <li>Client check-ins throughout the build</li>
+          <li>Available for calls when decisions need to be made</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHO NEEDS IT ─── -->
+<section class="who-needs">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">Who It's For</p>
+      <h2 class="section-title">Design Liaison Is Right<br>for Your Project If…</h2>
+    </div>
+    <div class="who-row">
+      <div class="who-block reveal">
+        <span class="who-num">01</span>
+        <h3 class="who-title">You're investing in a high-end outdoor space</h3>
+        <p class="who-desc">The higher the investment, the more important it is that the build reflects the design. Luxury outdoor projects have details that matter — and liaison protects every one of them.</p>
+      </div>
+      <div class="who-block reveal">
+        <span class="who-num">02</span>
+        <h3 class="who-title">You're not on-site every day to watch the build</h3>
+        <p class="who-desc">Most clients have jobs, families, and lives that don't allow them to monitor construction daily. Meagen is the eyes and ears you need without having to be there yourself.</p>
+      </div>
+      <div class="who-block reveal">
+        <span class="who-num">03</span>
+        <h3 class="who-title">You want the rendering to become reality</h3>
+        <p class="who-desc">If you went through the 3D design process to see your space exactly as it could be, liaison is how you make sure that's exactly how it's built — not a close approximation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STANDALONE OR BUNDLED ─── -->
+<section class="bundled">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">How to Engage</p>
+      <h2 class="section-title">Add It to Your Project<br>or Start Here</h2>
+    </div>
+    <div class="bundled-grid">
+      <div class="bundle-option featured reveal">
+        <span class="bundle-tag">Most Common</span>
+        <h3 class="bundle-title">Full-Service Design + Liaison</h3>
+        <p class="bundle-desc">The most seamless path from idea to finished backyard. Meagen designs your space in 3D, draws the construction plans, and then stays engaged through the build — one designer who knows every detail, start to finish.</p>
+        <ul class="bundle-includes">
+          <li>3D design and photorealistic renderings</li>
+          <li>Construction drawings and HOA package</li>
+          <li>Design liaison through the full build</li>
+          <li>One point of contact for everything</li>
+        </ul>
+        <div class="bundle-cta">
+          <a href="contact.html" class="arrow-link">
+            Start the full process
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="bundle-option reveal">
+        <span class="bundle-tag">Standalone</span>
+        <h3 class="bundle-title">Liaison Only</h3>
+        <p class="bundle-desc">Already have a design and plans from another source but want someone with construction knowledge in your corner during the build? Meagen can step in as your design advocate without having originated the design.</p>
+        <ul class="bundle-includes">
+          <li>Review of existing plans and design intent</li>
+          <li>Pre-construction contractor walkthrough</li>
+          <li>On-site visits at key milestones</li>
+          <li>Remote availability throughout the build</li>
+        </ul>
+        <div class="bundle-cta">
+          <a href="contact.html" class="arrow-link">
+            Talk about liaison only
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUOTE ─── -->
+<div class="quote-band">
+  <div class="section-inner">
+    <div class="divider reveal" style="margin-bottom:2rem;">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M6 0L7.5 4.5L12 6L7.5 7.5L6 12L4.5 7.5L0 6L4.5 4.5Z" fill="#C7CDBF"/>
+      </svg>
+    </div>
+    <p class="quote-text reveal">"The design doesn't end when construction starts. That's when it needs protecting the most."</p>
+    <p class="quote-attr reveal">— Meagen Lenhart, Outdoor Design Chick</p>
+  </div>
+</div>
+
+<!-- ─── CTA ─── -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <div class="reveal">
+      <h2 class="cta-title">Ready to Have Meagen<br>In Your Corner?</h2>
+      <p class="cta-sub">Serving Phoenix, Scottsdale, Paradise Valley, and the greater Arizona Valley.</p>
+    </div>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn-sand">Get in Touch</a>
+      <a href="tel:6028856917" class="btn-ghost-light">Call 602-885-6917</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-name">Outdoor Design Chick</p>
+      <p class="footer-tagline">Blurring the lines between<br>indoor and outdoor living.</p>
+      <div class="footer-contact">
+        <a href="tel:6028856917">602-885-6917</a>
+        <a href="mailto:meagen@outdoordesignchick.com">meagen@outdoordesignchick.com</a>
+        <span style="font-size:0.82rem; color:rgba(245,239,232,0.55);">Phoenix, Arizona</span>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Pages</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Services</p>
+      <ul class="footer-links">
+        <li><a href="3d-design.html">3D Design</a></li>
+        <li><a href="construction-plans.html">Construction Plans</a></li>
+        <li><a href="design-liaison.html">Design Liaison</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Follow Along</p>
+      <ul class="footer-links">
+        <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Houzz</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Pinterest</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Outdoor Design Chick · Phoenix, AZ</span>
+    <span>Design by Outdoor Design Chick</span>
+  </div>
+</footer>
+
+<script>
+  function openMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), idx * 90);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
