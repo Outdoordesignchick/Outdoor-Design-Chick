@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Outdoor Design Chick</title>
+  <meta name="description" content="Start your outdoor design project with Meagen Lenhart at Outdoor Design Chick. Serving Phoenix, Scottsdale, Paradise Valley and the Arizona Valley." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /*
+    @font-face {
+      font-family: 'Garet';
+      src: url('garet.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    */
+
+    :root {
+      --sand:      #F5EFE8;
+      --sage:      #919682;
+      --mist:      #C7CDBF;
+      --moss:      #595E48;
+      --ink:       #2C2C2A;
+      --ink-light: #5a5a57;
+      --parchment: #EDE8E0;
+
+      --font-display: 'Playfair Display SC', Georgia, serif;
+      --font-body:    'Garet', 'DM Sans', 'Inter', system-ui, sans-serif;
+      --max-w: 1280px;
+      --gutter: clamp(1.5rem, 5vw, 4rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font: inherit; border: none; background: none; }
+
+    body {
+      background: var(--sand);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245,239,232,0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 var(--mist);
+    }
+    nav {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 1.4rem var(--gutter);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      letter-spacing: 0.08em; color: var(--moss); line-height: 1.3;
+    }
+    .nav-links { display: flex; gap: clamp(1.5rem, 3vw, 2.5rem); list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink-light); transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--moss); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 0.35rem; }
+    .nav-dropdown > a svg { transition: transform 0.3s; }
+    .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+    .dropdown-menu {
+      position: absolute; top: calc(100% + 1rem); left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: rgba(245,239,232,0.98); backdrop-filter: blur(12px);
+      border: 1px solid var(--mist); min-width: 210px; padding: 0.5rem 0;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 200; box-shadow: 0 12px 40px rgba(44,44,42,0.1);
+    }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu::before {
+      content: ''; position: absolute; top: -5px; left: 50%;
+      transform: translateX(-50%) rotate(45deg); width: 9px; height: 9px;
+      background: rgba(245,239,232,0.98);
+      border-top: 1px solid var(--mist); border-left: 1px solid var(--mist);
+    }
+    .dropdown-menu a {
+      display: block; padding: 0.8rem 1.4rem;
+      font-size: 0.78rem !important; letter-spacing: 0.12em !important;
+      text-transform: uppercase; color: var(--ink-light) !important;
+      transition: color 0.2s, background 0.2s; white-space: nowrap;
+    }
+    .dropdown-menu a:hover { color: var(--moss) !important; background: rgba(89,94,72,0.05); }
+    .dropdown-divider { height: 1px; background: var(--mist); margin: 0.4rem 1.4rem; }
+    .nav-cta {
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.6rem 1.4rem; border: 1px solid var(--moss); color: var(--moss); transition: all 0.3s;
+    }
+    .nav-cta:hover { background: var(--moss); color: var(--sand); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 1.5px; background: var(--moss); }
+
+    /* ─── MOBILE MENU ─── */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: rgba(89,94,72,0.97); z-index: 99;
+      padding: 6rem var(--gutter) 3rem; flex-direction: column; gap: 0.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display); font-size: clamp(1.6rem, 5vw, 2.2rem);
+      color: var(--sand); padding: 0.8rem 0; border-bottom: 1px solid rgba(245,239,232,0.1);
+    }
+    .mobile-close { position: absolute; top: 1.6rem; right: var(--gutter); color: var(--sand); font-size: 1.5rem; }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      padding-top: 5.5rem; background: var(--moss);
+      position: relative; overflow: hidden;
+    }
+    .hero-botanical {
+      position: absolute; bottom: 0; right: 0;
+      width: clamp(180px, 26vw, 340px); opacity: 0.1; pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: clamp(3rem, 6vw, 5.5rem) var(--gutter) clamp(3rem, 5vw, 5rem);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem); align-items: center;
+    }
+    .page-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--mist); margin-bottom: 1.2rem;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 400; color: var(--sand); line-height: 1.1; margin-bottom: 1.2rem;
+    }
+    .page-subtitle {
+      font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+      color: rgba(199,205,191,0.8); line-height: 1.8; max-width: 44ch;
+    }
+
+    /* Hero right: contact details */
+    .contact-details { display: flex; flex-direction: column; gap: 0; }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 1.2rem;
+      padding: 1.4rem 0; border-bottom: 1px solid rgba(199,205,191,0.15);
+    }
+    .contact-item:first-child { border-top: 1px solid rgba(199,205,191,0.15); }
+    .contact-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 0.15rem; opacity: 0.6; }
+    .contact-label {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(199,205,191,0.5); margin-bottom: 0.25rem;
+    }
+    .contact-value {
+      font-size: clamp(0.9rem, 1.2vw, 1rem); color: var(--sand); line-height: 1.5;
+    }
+    .contact-value a { color: var(--sand); transition: color 0.2s; }
+    .contact-value a:hover { color: var(--mist); }
+
+    /* ─── FORM SECTION ─── */
+    .form-section {
+      padding: clamp(4rem, 7vw, 7rem) var(--gutter);
+      background: var(--sand);
+    }
+    .form-outer {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.6fr;
+      gap: clamp(3rem, 7vw, 8rem); align-items: start;
+    }
+
+    /* Left: sidebar info */
+    .form-sidebar { position: sticky; top: 7rem; }
+    .sidebar-label {
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 1rem;
+    }
+    .sidebar-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 400; line-height: 1.2; color: var(--ink); margin-bottom: 1.2rem;
+    }
+    .sidebar-body { color: var(--ink-light); line-height: 1.9; font-size: 0.92rem; margin-bottom: 2rem; }
+    .sidebar-steps { display: flex; flex-direction: column; gap: 0; }
+    .sidebar-step {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.1rem 0; border-bottom: 1px solid var(--mist);
+    }
+    .sidebar-step:first-child { border-top: 1px solid var(--mist); }
+    .step-dot {
+      width: 24px; height: 24px; border: 1px solid var(--mist);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 0.1rem;
+    }
+    .step-dot span {
+      font-family: var(--font-display); font-size: 0.65rem; color: var(--sage);
+    }
+    .step-text-title {
+      font-family: var(--font-display); font-size: 0.9rem;
+      color: var(--ink); margin-bottom: 0.15rem;
+    }
+    .step-text-desc { font-size: 0.82rem; color: var(--ink-light); line-height: 1.65; }
+
+    /* ─── FORM ─── */
+    .contact-form { display: flex; flex-direction: column; gap: 0; }
+
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--mist); margin-bottom: 1px;
+    }
+    .form-row.full { grid-template-columns: 1fr; }
+
+    .field {
+      background: var(--parchment); padding: 1.4rem 1.6rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+      transition: background 0.2s;
+    }
+    .field:focus-within { background: #e8e3da; }
+
+    label {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--sage); display: flex; align-items: center; gap: 0.4rem;
+    }
+    .required { color: var(--moss); font-size: 0.6rem; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+      background: none; border: none; outline: none;
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 1.1vw, 1rem);
+      color: var(--ink); line-height: 1.5; width: 100%;
+      padding: 0; resize: none;
+    }
+    input::placeholder, textarea::placeholder { color: var(--mist); }
+    select { cursor: pointer; -webkit-appearance: none; appearance: none; }
+    select option { background: var(--sand); color: var(--ink); }
+    textarea { min-height: 120px; }
+
+    /* Checkbox group */
+    .checkbox-group {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.3rem;
+    }
+    .checkbox-pill {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--mist);
+      cursor: pointer; transition: all 0.2s;
+      font-size: 0.8rem; color: var(--ink-light);
+      user-select: none;
+    }
+    .checkbox-pill input[type="checkbox"] { display: none; }
+    .checkbox-pill:hover { border-color: var(--sage); color: var(--ink); }
+    .checkbox-pill.checked {
+      border-color: var(--moss); background: rgba(89,94,72,0.06); color: var(--moss);
+    }
+    .pill-check {
+      width: 14px; height: 14px; border: 1px solid var(--mist);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s;
+    }
+    .checkbox-pill.checked .pill-check {
+      background: var(--moss); border-color: var(--moss);
+    }
+    .pill-check svg { opacity: 0; transition: opacity 0.15s; }
+    .checkbox-pill.checked .pill-check svg { opacity: 1; }
+
+    /* Radio group */
+    .radio-group { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.3rem; }
+    .radio-pill {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 1rem; border: 1px solid var(--mist);
+      cursor: pointer; transition: all 0.2s;
+      font-size: 0.8rem; color: var(--ink-light); user-select: none;
+    }
+    .radio-pill input[type="radio"] { display: none; }
+    .radio-pill:hover { border-color: var(--sage); color: var(--ink); }
+    .radio-pill.checked { border-color: var(--moss); background: rgba(89,94,72,0.06); color: var(--moss); }
+    .radio-dot {
+      width: 14px; height: 14px; border: 1px solid var(--mist);
+      border-radius: 50%; flex-shrink: 0; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .radio-pill.checked .radio-dot { border-color: var(--moss); }
+    .radio-dot::after {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--moss); opacity: 0; transition: opacity 0.15s;
+    }
+    .radio-pill.checked .radio-dot::after { opacity: 1; }
+
+    /* Select wrapper */
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: '';
+      position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid var(--sage);
+      pointer-events: none;
+    }
+
+    /* Submit */
+    .form-submit {
+      margin-top: 1px; background: var(--parchment);
+      padding: 1.6rem; display: flex;
+      align-items: center; justify-content: space-between; gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .submit-note { font-size: 0.8rem; color: var(--ink-light); line-height: 1.6; max-width: 36ch; }
+    .submit-note strong { color: var(--ink); }
+    .btn-submit {
+      padding: 1.1rem 2.8rem; background: var(--moss); color: var(--sand);
+      font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 0.14em;
+      text-transform: uppercase; border: none; cursor: pointer;
+      transition: background 0.3s; white-space: nowrap; flex-shrink: 0;
+    }
+    .btn-submit:hover { background: #4d5240; }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Success state */
+    .form-success {
+      display: none; text-align: center;
+      padding: clamp(3rem, 5vw, 5rem) 2rem;
+      background: var(--parchment);
+    }
+    .form-success.show { display: block; }
+    .success-icon {
+      width: 56px; height: 56px; border: 1px solid var(--mist);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.4rem;
+    }
+    .success-title {
+      font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 400; color: var(--moss); margin-bottom: 0.8rem;
+    }
+    .success-body { color: var(--ink-light); max-width: 40ch; margin: 0 auto; line-height: 1.8; }
+
+    /* Error state */
+    .field-error { font-size: 0.72rem; color: #a05050; margin-top: 0.2rem; display: none; }
+    .field.has-error { background: #f5ece8; }
+    .field.has-error label { color: #a05050; }
+    .field.has-error .field-error { display: block; }
+
+    /* ─── INFO STRIP ─── */
+    .info-strip {
+      background: var(--moss); padding: clamp(2.5rem, 4vw, 4rem) var(--gutter);
+    }
+    .info-strip-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: rgba(245,239,232,0.1);
+    }
+    .info-card {
+      background: var(--moss); padding: 2rem 2.2rem;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+    }
+    .info-icon { width: 24px; height: 24px; flex-shrink: 0; opacity: 0.55; margin-top: 0.1rem; }
+    .info-title { font-family: var(--font-display); font-size: 0.9rem; color: var(--sand); margin-bottom: 0.3rem; font-weight: 400; }
+    .info-desc { font-size: 0.82rem; color: rgba(199,205,191,0.65); line-height: 1.7; }
+    .info-desc a { color: rgba(199,205,191,0.75); transition: color 0.2s; }
+    .info-desc a:hover { color: var(--mist); }
+
+    /* ─── FOOTER ─── */
+    footer { background: #1e201a; color: rgba(245,239,232,0.6); padding: clamp(3rem, 5vw, 5rem) var(--gutter) 2rem; }
+    .footer-grid {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 4rem); padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(245,239,232,0.08);
+    }
+    .footer-brand-name { font-family: var(--font-display); font-size: 1rem; color: var(--sand); letter-spacing: 0.06em; margin-bottom: 1rem; }
+    .footer-tagline { font-size: 0.85rem; font-style: italic; color: rgba(245,239,232,0.4); line-height: 1.7; margin-bottom: 1.4rem; }
+    .footer-contact a { display: block; font-size: 0.82rem; color: rgba(245,239,232,0.55); line-height: 1.9; transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--mist); }
+    .footer-col-title { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,239,232,0.3); margin-bottom: 1.2rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.55rem; }
+    .footer-links a { font-size: 0.85rem; color: rgba(245,239,232,0.55); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--mist); }
+    .footer-bottom { max-width: var(--max-w); margin: 1.6rem auto 0; display: flex; justify-content: space-between; font-size: 0.72rem; color: rgba(245,239,232,0.25); flex-wrap: wrap; gap: 0.5rem; }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .contact-details { display: none; }
+      .form-outer { grid-template-columns: 1fr; }
+      .form-sidebar { position: static; }
+      .sidebar-steps { display: none; }
+      .info-strip-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+    }
+    @media (max-width: 640px) {
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .form-submit { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── MOBILE MENU ─── -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html" onclick="closeMobileMenu()">Home</a>
+  <a href="about.html" onclick="closeMobileMenu()">About Me</a>
+  <a href="services.html" onclick="closeMobileMenu()">Services</a>
+  <a href="3d-design.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— 3D Design</a>
+  <a href="construction-plans.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— Construction Plans</a>
+  <a href="design-liaison.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6);">— Design Liaison</a>
+  <a href="gallery.html" onclick="closeMobileMenu()">Projects</a>
+  <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
+</nav>
+
+<!-- ─── NAV ─── -->
+<header>
+  <nav aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">Outdoor Design Chick</a>
+    <ul class="nav-links">
+      <li><a href="about.html">About Me</a></li>
+      <li class="nav-dropdown">
+        <a href="services.html">
+          Services
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+            <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="dropdown-menu">
+          <a href="3d-design.html">3D Design</a>
+          <div class="dropdown-divider"></div>
+          <a href="construction-plans.html">Construction Plans</a>
+          <div class="dropdown-divider"></div>
+          <a href="design-liaison.html">Design Liaison</a>
+        </div>
+      </li>
+      <li><a href="gallery.html">Projects</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta active" style="background:var(--moss);color:var(--sand);">Start Your Project</a>
+    <button class="nav-toggle" onclick="openMobileMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ─── PAGE HERO ─── -->
+<div class="page-hero">
+  <svg class="hero-botanical" viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M150 480 L150 120" stroke="#F5EFE8" stroke-width="1.4"/>
+    <path d="M138 480 L138 120" stroke="#F5EFE8" stroke-width="1.4"/>
+    <path d="M138 120 C138 100 162 100 162 120" stroke="#F5EFE8" stroke-width="1.4" fill="none"/>
+    <line x1="144" y1="480" x2="144" y2="124" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <line x1="150" y1="480" x2="150" y2="102" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <line x1="156" y1="480" x2="156" y2="124" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <path d="M138 290 C120 287 108 274 102 256 C96 238 96 216 96 198 L96 162 C96 150 101 144 109 144 C117 144 122 150 122 162 L122 198 C122 211 130 220 138 224" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M96 162 C96 149 122 149 122 162" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M162 255 C180 251 192 238 198 220 C204 202 204 180 204 162 L204 126 C204 114 199 108 191 108 C183 108 178 114 178 126 L178 162 C178 175 170 184 162 188" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M178 126 C178 113 204 113 204 126" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+  </svg>
+  <div class="page-hero-inner">
+    <div class="reveal">
+      <p class="page-eyebrow">Let's Work Together</p>
+      <h1 class="page-title">Start Your<br>Outdoor Living<br>Project</h1>
+      <p class="page-subtitle">Fill out the form and Meagen will reach out personally — usually within one business day.</p>
+    </div>
+    <div class="contact-details reveal">
+      <div class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 20 20" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/>
+          <path d="M3 7l7 5 7-5"/>
+        </svg>
+        <div>
+          <p class="contact-label">Email</p>
+          <p class="contact-value"><a href="mailto:meagen@outdoordesignchick.com">meagen@outdoordesignchick.com</a></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 20 20" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 4a1 1 0 011-1h3l1.5 4-2 1.5a11 11 0 005 5L13 11.5l4 1.5v3a1 1 0 01-1 1A15 15 0 013 4z"/>
+        </svg>
+        <div>
+          <p class="contact-label">Phone</p>
+          <p class="contact-value"><a href="tel:6028856917">602-885-6917</a></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 20 20" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 2C6.686 2 4 4.686 4 8c0 4.418 6 10 6 10s6-5.582 6-10c0-3.314-2.686-6-6-6z"/>
+          <circle cx="10" cy="8" r="2"/>
+        </svg>
+        <div>
+          <p class="contact-label">Location</p>
+          <p class="contact-value">Phoenix, Arizona<br><span style="font-size:0.85rem; color:rgba(199,205,191,0.55);">Serving the entire Arizona Valley</span></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <svg class="contact-icon" viewBox="0 0 20 20" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="10" cy="10" r="8"/>
+          <path d="M10 6v4l3 3"/>
+        </svg>
+        <div>
+          <p class="contact-label">Response Time</p>
+          <p class="contact-value">Within one business day</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FORM SECTION ─── -->
+<section class="form-section">
+  <div class="form-outer">
+
+    <!-- Sidebar -->
+    <div class="form-sidebar reveal">
+      <p class="sidebar-label">What Happens Next</p>
+      <h2 class="sidebar-title">Simple From<br>Here</h2>
+      <p class="sidebar-body">No pressure, no sales call. Just a real conversation about your project and how Meagen can help bring it to life.</p>
+      <div class="sidebar-steps">
+        <div class="sidebar-step">
+          <div class="step-dot"><span>1</span></div>
+          <div>
+            <p class="step-text-title">You Submit the Form</p>
+            <p class="step-text-desc">Share the basics about your project — takes about two minutes.</p>
+          </div>
+        </div>
+        <div class="sidebar-step">
+          <div class="step-dot"><span>2</span></div>
+          <div>
+            <p class="step-text-title">Meagen Reaches Out</p>
+            <p class="step-text-desc">She'll get back to you personally within one business day to learn more.</p>
+          </div>
+        </div>
+        <div class="sidebar-step">
+          <div class="step-dot"><span>3</span></div>
+          <div>
+            <p class="step-text-title">Discovery Call</p>
+            <p class="step-text-desc">A relaxed conversation about your space, your vision, and how to move forward.</p>
+          </div>
+        </div>
+        <div class="sidebar-step">
+          <div class="step-dot"><span>4</span></div>
+          <div>
+            <p class="step-text-title">Your Project Begins</p>
+            <p class="step-text-desc">Once scope and timeline are agreed, design work starts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="reveal">
+
+      <!--
+        FORMSPREE SETUP:
+        1. Go to https://formspree.io and create a free account
+        2. Create a new form — copy your unique form ID
+        3. Replace "YOUR_FORM_ID" in the action below with your ID
+           e.g. action="https://formspree.io/f/abcd1234"
+        That's it — submissions will arrive in your inbox.
+      -->
+      <form
+        class="contact-form"
+        id="contactForm"
+        action="https://formspree.io/f/YOUR_FORM_ID"
+        method="POST"
+        novalidate
+      >
+        <!-- Name + Phone -->
+        <div class="form-row">
+          <div class="field" id="field-name">
+            <label for="name">Full Name <span class="required">✦</span></label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="name" required />
+            <span class="field-error">Please enter your name</span>
+          </div>
+          <div class="field" id="field-phone">
+            <label for="phone">Phone Number <span class="required">✦</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="602-000-0000" autocomplete="tel" required />
+            <span class="field-error">Please enter your phone number</span>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-row full">
+          <div class="field" id="field-email">
+            <label for="email">Email Address <span class="required">✦</span></label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+            <span class="field-error">Please enter a valid email address</span>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="form-row full">
+          <div class="field">
+            <label for="address">Project Address or City</label>
+            <input type="text" id="address" name="address" placeholder="Scottsdale, AZ or full address" autocomplete="street-address" />
+          </div>
+        </div>
+
+        <!-- Service Type -->
+        <div class="form-row full">
+          <div class="field" id="field-service">
+            <label>Service Interested In <span class="required">✦</span></label>
+            <div class="checkbox-group" id="serviceGroup">
+              <label class="checkbox-pill" onclick="togglePill(this)">
+                <input type="checkbox" name="service[]" value="3D Design" />
+                <span class="pill-check">
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.5 6L6.5 2" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                3D Design
+              </label>
+              <label class="checkbox-pill" onclick="togglePill(this)">
+                <input type="checkbox" name="service[]" value="Construction Plans" />
+                <span class="pill-check">
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.5 6L6.5 2" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Construction Plans
+              </label>
+              <label class="checkbox-pill" onclick="togglePill(this)">
+                <input type="checkbox" name="service[]" value="Design Liaison" />
+                <span class="pill-check">
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.5 6L6.5 2" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Design Liaison
+              </label>
+              <label class="checkbox-pill" onclick="togglePill(this)">
+                <input type="checkbox" name="service[]" value="All of the Above" />
+                <span class="pill-check">
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.5 6L6.5 2" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                All of the Above
+              </label>
+            </div>
+            <span class="field-error" id="service-error">Please select at least one service</span>
+          </div>
+        </div>
+
+        <!-- Project Budget -->
+        <div class="form-row full">
+          <div class="field">
+            <label>Project Budget <span style="font-size:0.62rem; color:var(--mist); letter-spacing:0.1em;">(construction, not design fee)</span></label>
+            <div class="radio-group" id="budgetGroup">
+              <label class="radio-pill" onclick="toggleRadio(this, 'budgetGroup')">
+                <input type="radio" name="budget" value="Under $100k" />
+                <span class="radio-dot"></span>
+                Under $100k
+              </label>
+              <label class="radio-pill" onclick="toggleRadio(this, 'budgetGroup')">
+                <input type="radio" name="budget" value="$100k–$200k" />
+                <span class="radio-dot"></span>
+                $100k – $200k
+              </label>
+              <label class="radio-pill" onclick="toggleRadio(this, 'budgetGroup')">
+                <input type="radio" name="budget" value="$250k+" />
+                <span class="radio-dot"></span>
+                $250k+
+              </label>
+              <label class="radio-pill" onclick="toggleRadio(this, 'budgetGroup')">
+                <input type="radio" name="budget" value="Not sure yet" />
+                <span class="radio-dot"></span>
+                Not sure yet
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contractor / Designer -->
+        <div class="form-row full">
+          <div class="field">
+            <label>Do you already have a contractor or designer?</label>
+            <div class="radio-group" id="contractorGroup">
+              <label class="radio-pill" onclick="toggleRadio(this, 'contractorGroup')">
+                <input type="radio" name="has_contractor" value="Yes" />
+                <span class="radio-dot"></span>
+                Yes
+              </label>
+              <label class="radio-pill" onclick="toggleRadio(this, 'contractorGroup')">
+                <input type="radio" name="has_contractor" value="No" />
+                <span class="radio-dot"></span>
+                No
+              </label>
+              <label class="radio-pill" onclick="toggleRadio(this, 'contractorGroup')">
+                <input type="radio" name="has_contractor" value="Still looking" />
+                <span class="radio-dot"></span>
+                Still looking
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- How did you hear -->
+        <div class="form-row full">
+          <div class="field">
+            <label for="referral">How Did You Hear About Us?</label>
+            <div class="select-wrap">
+              <select id="referral" name="referral">
+                <option value="" disabled selected>Select one</option>
+                <option value="Google">Google</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Referral from a friend">Referral from a friend</option>
+                <option value="Contractor referral">Contractor referral</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-row full">
+          <div class="field">
+            <label for="notes">Tell Us About Your Project</label>
+            <textarea id="notes" name="notes" placeholder="Share any details about your space, what you're envisioning, timeline, or anything else that would help Meagen understand your project…"></textarea>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-submit">
+          <p class="submit-note">
+            <strong>No spam, ever.</strong> Your information is only used to follow up about your project. Meagen responds personally.
+          </p>
+          <button type="submit" class="btn-submit" id="submitBtn">Send My Inquiry</button>
+        </div>
+
+      </form>
+
+      <!-- Success message -->
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#595E48" stroke-width="1.4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5 13L9 17L19 7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="success-title">Message Received</h3>
+        <p class="success-body">Thank you for reaching out. Meagen will be in touch personally within one business day. We can't wait to hear more about your project.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── INFO STRIP ─── -->
+<div class="info-strip">
+  <div class="info-strip-inner section-inner">
+    <div class="info-card reveal">
+      <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/>
+        <path d="M3 7l7 5 7-5"/>
+      </svg>
+      <div>
+        <p class="info-title">Email Meagen</p>
+        <p class="info-desc"><a href="mailto:meagen@outdoordesignchick.com">meagen@outdoordesignchick.com</a></p>
+      </div>
+    </div>
+    <div class="info-card reveal">
+      <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 4a1 1 0 011-1h4l1.5 5-2.5 1.5a11 11 0 006 6L15 13l5 1.5V18a1 1 0 01-1 1A17 17 0 013 4z"/>
+      </svg>
+      <div>
+        <p class="info-title">Call or Text</p>
+        <p class="info-desc"><a href="tel:6028856917">602-885-6917</a></p>
+      </div>
+    </div>
+    <div class="info-card reveal">
+      <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+        <circle cx="12" cy="9" r="2.5"/>
+      </svg>
+      <div>
+        <p class="info-title">Service Area</p>
+        <p class="info-desc">Phoenix · Scottsdale · Paradise Valley · Chandler · Arcadia · and surrounding communities</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-name">Outdoor Design Chick</p>
+      <p class="footer-tagline">Blurring the lines between<br>indoor and outdoor living.</p>
+      <div class="footer-contact">
+        <a href="tel:6028856917">602-885-6917</a>
+        <a href="mailto:meagen@outdoordesignchick.com">meagen@outdoordesignchick.com</a>
+        <span style="font-size:0.82rem; color:rgba(245,239,232,0.55);">Phoenix, Arizona</span>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Pages</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Services</p>
+      <ul class="footer-links">
+        <li><a href="3d-design.html">3D Design</a></li>
+        <li><a href="construction-plans.html">Construction Plans</a></li>
+        <li><a href="design-liaison.html">Design Liaison</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Follow Along</p>
+      <ul class="footer-links">
+        <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Houzz</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Pinterest</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Outdoor Design Chick · Phoenix, AZ</span>
+    <span>Design by Outdoor Design Chick</span>
+  </div>
+</footer>
+
+<script>
+  // ─── MOBILE MENU ───
+  function openMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ─── CHECKBOX PILLS ───
+  function togglePill(label) {
+    label.classList.toggle('checked');
+    const input = label.querySelector('input[type="checkbox"]');
+    input.checked = !input.checked;
+  }
+
+  // ─── RADIO PILLS ───
+  function toggleRadio(label, groupId) {
+    const group = document.getElementById(groupId);
+    group.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('checked'));
+    label.classList.add('checked');
+    label.querySelector('input[type="radio"]').checked = true;
+  }
+
+  // ─── FORM VALIDATION + SUBMIT ───
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let valid = true;
+
+    // Name
+    const name = document.getElementById('name');
+    const fieldName = document.getElementById('field-name');
+    if (!name.value.trim()) {
+      fieldName.classList.add('has-error'); valid = false;
+    } else { fieldName.classList.remove('has-error'); }
+
+    // Phone
+    const phone = document.getElementById('phone');
+    const fieldPhone = document.getElementById('field-phone');
+    if (!phone.value.trim()) {
+      fieldPhone.classList.add('has-error'); valid = false;
+    } else { fieldPhone.classList.remove('has-error'); }
+
+    // Email
+    const email = document.getElementById('email');
+    const fieldEmail = document.getElementById('field-email');
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(email.value.trim())) {
+      fieldEmail.classList.add('has-error'); valid = false;
+    } else { fieldEmail.classList.remove('has-error'); }
+
+    // Service (at least one checked)
+    const checkedServices = document.querySelectorAll('#serviceGroup input[type="checkbox"]:checked');
+    const fieldService = document.getElementById('field-service');
+    const serviceError = document.getElementById('service-error');
+    if (checkedServices.length === 0) {
+      fieldService.classList.add('has-error');
+      serviceError.style.display = 'block';
+      valid = false;
+    } else {
+      fieldService.classList.remove('has-error');
+      serviceError.style.display = 'none';
+    }
+
+    if (!valid) return;
+
+    // Submit via Formspree
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const data = new FormData(this);
+      const res = await fetch(this.action, {
+        method: 'POST', body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formSuccess').classList.add('show');
+        window.scrollTo({ top: document.getElementById('formSuccess').offsetTop - 100, behavior: 'smooth' });
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Send My Inquiry';
+        alert('Something went wrong. Please try again or email meagen@outdoordesignchick.com directly.');
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Send My Inquiry';
+      alert('Something went wrong. Please try again or email meagen@outdoordesignchick.com directly.');
+    }
+  });
+
+  // Clear errors on input
+  ['name','phone','email'].forEach(id => {
+    document.getElementById(id).addEventListener('input', function() {
+      document.getElementById('field-' + id)?.classList.remove('has-error');
+    });
+  });
+
+  // ─── REVEAL ───
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), idx * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
