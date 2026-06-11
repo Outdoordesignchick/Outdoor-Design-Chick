@@ -128,6 +128,38 @@
       background: var(--moss);
     }
 
+    /* ─── DROPDOWN ─── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 0.35rem; }
+    .nav-dropdown > a svg { transition: transform 0.3s; flex-shrink: 0; }
+    .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+    .dropdown-menu {
+      position: absolute; top: calc(100% + 1rem); left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: rgba(245,239,232,0.98); backdrop-filter: blur(12px);
+      border: 1px solid var(--mist); min-width: 210px; padding: 0.5rem 0;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 200; box-shadow: 0 12px 40px rgba(44,44,42,0.1);
+    }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu::before {
+      content: ''; position: absolute; top: -5px; left: 50%;
+      transform: translateX(-50%) rotate(45deg); width: 9px; height: 9px;
+      background: rgba(245,239,232,0.98);
+      border-top: 1px solid var(--mist); border-left: 1px solid var(--mist);
+    }
+    .dropdown-menu a {
+      display: block; padding: 0.8rem 1.4rem;
+      font-size: 0.78rem !important; letter-spacing: 0.12em !important;
+      text-transform: uppercase; color: var(--ink-light) !important;
+      transition: color 0.2s, background 0.2s; white-space: nowrap;
+    }
+    .dropdown-menu a:hover, .dropdown-menu a.active {
+      color: var(--moss) !important; background: rgba(89,94,72,0.05);
+    }
+    .dropdown-divider { height: 1px; background: var(--mist); margin: 0.4rem 1.4rem; }
+
     /* ─── MOBILE MENU ─── */
     .mobile-menu {
       display: none;
@@ -601,23 +633,34 @@
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
   <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
   <a href="index.html" onclick="closeMobileMenu()">Home</a>
-  <a href="about.html" onclick="closeMobileMenu()">About</a>
+  <a href="about.html" onclick="closeMobileMenu()">About Me</a>
   <a href="services.html" onclick="closeMobileMenu()">Services</a>
-  <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
+  <a href="3d-design.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— 3D Design</a>
+  <a href="construction-plans.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— Construction Plans</a>
+  <a href="design-liaison.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6);">— Design Liaison</a>
+  <a href="gallery.html" onclick="closeMobileMenu()">Projects</a>
   <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
 </nav>
-
-<!-- ─── NAV ─── -->
 <header id="siteHeader">
   <nav aria-label="Main navigation">
-    <a href="index.html" class="nav-logo" aria-label="Outdoor Design Chick Home">
-      Outdoor Design Chick
-    </a>
+    <a href="index.html" class="nav-logo" aria-label="Outdoor Design Chick Home">Outdoor Design Chick</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html" class="active">About Me</a></li>
+      <li class="nav-dropdown">
+        <a href="services.html">Services
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="dropdown-menu">
+          <a href="3d-design.html">3D Design</a>
+          <div class="dropdown-divider"></div>
+          <a href="construction-plans.html">Construction Plans</a>
+          <div class="dropdown-divider"></div>
+          <a href="design-liaison.html">Design Liaison</a>
+        </div>
+      </li>
+      <li><a href="gallery.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <a href="contact.html" class="nav-cta">Start Your Project</a>
     <button class="nav-toggle" onclick="openMobileMenu()" aria-label="Open menu">
