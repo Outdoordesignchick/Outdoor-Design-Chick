@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Construction Plans — Outdoor Design Chick</title>
+  <meta name="description" content="Professional construction plans and HOA submission packages for pools, landscape, hardscape, and outdoor structures in Phoenix, AZ. Contractor-ready drawings that get approved." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /*
+    @font-face {
+      font-family: 'Garet';
+      src: url('garet.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    */
+
+    :root {
+      --sand:      #F5EFE8;
+      --sage:      #919682;
+      --mist:      #C7CDBF;
+      --moss:      #595E48;
+      --ink:       #2C2C2A;
+      --ink-light: #5a5a57;
+      --parchment: #EDE8E0;
+
+      --font-display: 'Playfair Display SC', Georgia, serif;
+      --font-body:    'Garet', 'DM Sans', 'Inter', system-ui, sans-serif;
+      --max-w: 1280px;
+      --gutter: clamp(1.5rem, 5vw, 4rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font: inherit; border: none; background: none; }
+
+    body {
+      background: var(--sand);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 auto;
+      width: fit-content;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      display: block;
+      width: clamp(60px, 8vw, 120px);
+      height: 1px;
+      background: var(--mist);
+    }
+
+    /* ─── NAV ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(245,239,232,0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 var(--mist);
+    }
+    nav {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 1.4rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      letter-spacing: 0.08em;
+      color: var(--moss);
+      line-height: 1.3;
+    }
+    .nav-links {
+      display: flex;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--moss); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 0.35rem; }
+    .nav-dropdown > a svg { transition: transform 0.3s; }
+    .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 1rem);
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: rgba(245,239,232,0.98);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--mist);
+      min-width: 210px;
+      padding: 0.5rem 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 200;
+      box-shadow: 0 12px 40px rgba(44,44,42,0.1);
+    }
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1; visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -5px; left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 9px; height: 9px;
+      background: rgba(245,239,232,0.98);
+      border-top: 1px solid var(--mist);
+      border-left: 1px solid var(--mist);
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.8rem 1.4rem;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase;
+      color: var(--ink-light) !important;
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover, .dropdown-menu a.active {
+      color: var(--moss) !important;
+      background: rgba(89,94,72,0.05);
+    }
+    .dropdown-divider { height: 1px; background: var(--mist); margin: 0.4rem 1.4rem; }
+    .nav-cta {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      border: 1px solid var(--moss);
+      color: var(--moss);
+      transition: all 0.3s;
+    }
+    .nav-cta:hover { background: var(--moss); color: var(--sand); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 1.5px; background: var(--moss); }
+
+    /* ─── MOBILE MENU ─── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(89,94,72,0.97);
+      z-index: 99;
+      padding: 6rem var(--gutter) 3rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      color: var(--sand);
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(245,239,232,0.1);
+    }
+    .mobile-close {
+      position: absolute;
+      top: 1.6rem; right: var(--gutter);
+      color: var(--sand); font-size: 1.5rem;
+    }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      padding-top: 5.5rem;
+      background: var(--moss);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-botanical {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: clamp(180px, 28vw, 380px);
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(3rem, 6vw, 6rem) var(--gutter) clamp(3rem, 5vw, 5rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: center;
+    }
+    .page-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 1.2rem;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 400;
+      color: var(--sand);
+      line-height: 1.1;
+      margin-bottom: 1.4rem;
+    }
+    .page-subtitle {
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: rgba(199,205,191,0.8);
+      line-height: 1.8;
+      max-width: 46ch;
+      margin-bottom: 2rem;
+    }
+    .hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* Buttons */
+    .btn-sand {
+      padding: 1rem 2.2rem;
+      background: var(--sand);
+      color: var(--moss);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+    .btn-sand:hover { background: var(--mist); }
+    .btn-ghost-light {
+      padding: 1rem 2.2rem;
+      border: 1px solid rgba(245,239,232,0.35);
+      color: var(--sand);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .btn-ghost-light:hover { border-color: var(--sand); background: rgba(245,239,232,0.08); }
+    .btn-moss {
+      padding: 1rem 2.2rem;
+      background: var(--moss);
+      color: var(--sand);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--moss);
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .btn-moss:hover { background: #4d5240; border-color: #4d5240; }
+
+    /* Hero stat cards */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(199,205,191,0.15);
+    }
+    .hero-stat {
+      background: rgba(245,239,232,0.06);
+      padding: 1.8rem;
+      border: 1px solid rgba(199,205,191,0.12);
+    }
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--sand);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .hero-stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(199,205,191,0.65);
+      line-height: 1.4;
+    }
+
+    /* ─── SECTION SHELL ─── */
+    section { padding: clamp(4rem, 7vw, 7rem) var(--gutter); }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+
+    /* Arrow link */
+    .arrow-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--moss);
+      border-bottom: 1px solid var(--mist);
+      padding-bottom: 0.2rem;
+      transition: border-color 0.3s, gap 0.3s;
+    }
+    .arrow-link:hover { border-color: var(--moss); gap: 1rem; }
+
+    /* ─── INTRO SPLIT ─── */
+    .intro-split { background: var(--sand); }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 7vw, 8rem);
+      align-items: center;
+    }
+    .intro-body p {
+      color: var(--ink-light);
+      line-height: 1.9;
+      margin-bottom: 1.3rem;
+    }
+    .intro-body p:last-child { margin-bottom: 0; }
+    .intro-body strong { color: var(--ink); font-weight: 600; }
+    .pull-quote {
+      border-left: 2px solid var(--mist);
+      padding: 0.8rem 0 0.8rem 1.8rem;
+      margin: 1.8rem 0;
+    }
+    .pull-quote p {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.6vw, 1.3rem);
+      font-style: italic;
+      color: var(--moss);
+      line-height: 1.5;
+    }
+
+    /* Plan image mock */
+    .plan-visual {
+      position: relative;
+    }
+    .plan-visual::before {
+      content: '';
+      position: absolute;
+      top: -14px; left: 14px;
+      right: -14px; bottom: 14px;
+      border: 1px solid var(--mist);
+      z-index: 0;
+    }
+    .plan-frame {
+      position: relative;
+      z-index: 1;
+      background: var(--parchment);
+      aspect-ratio: 4/5;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      gap: 1rem;
+      overflow: hidden;
+    }
+    /* Blueprint-style decoration inside plan frame */
+    .plan-lines { flex: 1; position: relative; }
+    .plan-line {
+      position: absolute;
+      background: var(--mist);
+    }
+    .plan-caption {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--mist);
+    }
+    /*
+      PHOTO: Replace the .plan-frame div with:
+      <img src="plan-example.jpg" alt="Example construction plan drawing" style="position:relative;z-index:1;width:100%;aspect-ratio:4/5;object-fit:cover;" />
+    */
+
+    /* ─── WHAT'S INCLUDED ─── */
+    .included { background: var(--parchment); }
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--mist);
+      margin-top: clamp(2.5rem, 4vw, 4rem);
+    }
+    .included-card {
+      background: var(--parchment);
+      padding: clamp(2rem, 3vw, 2.8rem);
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      transition: background 0.3s;
+    }
+    .included-card:hover { background: #e4dfd6; }
+    .included-icon {
+      width: 36px; height: 36px;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+      opacity: 0.6;
+    }
+    .included-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .included-desc {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+    }
+
+    /* ─── WHO IT'S FOR ─── */
+    .who { background: var(--sand); }
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(2rem, 4vw, 4rem);
+      margin-top: clamp(2.5rem, 4vw, 4rem);
+    }
+    .who-card {
+      padding: 2.2rem;
+      border: 1px solid var(--mist);
+      position: relative;
+      transition: border-color 0.3s;
+    }
+    .who-card:hover { border-color: var(--sage); }
+    .who-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sand);
+      background: var(--moss);
+      padding: 0.3rem 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .who-title {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+    .who-desc {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+    }
+    .who-list {
+      list-style: none;
+      margin-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .who-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+      font-size: 0.88rem;
+      color: var(--ink-light);
+    }
+    .who-list li::before {
+      content: '◆';
+      font-size: 0.4rem;
+      color: var(--mist);
+      flex-shrink: 0;
+    }
+
+    /* ─── SCOPE ─── */
+    .scope { background: var(--moss); }
+    .scope .section-label { color: var(--mist); }
+    .scope .section-title { color: var(--sand); }
+    .scope-sub { color: rgba(199,205,191,0.75); max-width: 50ch; line-height: 1.85; margin-bottom: clamp(2.5rem, 4vw, 4rem); }
+    .scope-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(245,239,232,0.1);
+    }
+    .scope-card {
+      background: var(--moss);
+      padding: 2rem 1.8rem;
+      transition: background 0.3s;
+    }
+    .scope-card:hover { background: #4d5240; }
+    .scope-icon { width: 28px; height: 28px; margin-bottom: 1rem; opacity: 0.65; }
+    .scope-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--sand);
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+    .scope-desc { font-size: 0.84rem; color: rgba(199,205,191,0.65); line-height: 1.8; }
+
+    /* ─── PROCESS ─── */
+    .process { background: var(--sand); }
+    .process-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: end;
+      margin-bottom: clamp(3rem, 5vw, 5rem);
+    }
+    .process-body { color: var(--ink-light); line-height: 1.9; }
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--mist);
+    }
+    .step-block {
+      background: var(--sand);
+      padding: 2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--mist);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .step-desc { font-size: 0.86rem; color: var(--ink-light); line-height: 1.8; }
+
+    /* ─── HOA CALLOUT ─── */
+    .hoa-band {
+      background: var(--parchment);
+      padding: clamp(3.5rem, 6vw, 6rem) var(--gutter);
+    }
+    .hoa-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+    }
+    .hoa-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .hoa-body { color: var(--ink-light); line-height: 1.9; }
+    .hoa-body p { margin-bottom: 1rem; }
+    .hoa-checks { display: flex; flex-direction: column; gap: 0; }
+    .hoa-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--mist);
+    }
+    .hoa-check:first-child { border-top: 1px solid var(--mist); }
+    .check-icon {
+      width: 20px; height: 20px;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .hoa-check-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .hoa-check-desc { font-size: 0.86rem; color: var(--ink-light); line-height: 1.7; }
+
+    /* ─── QUOTE ─── */
+    .quote-band {
+      background: var(--sand);
+      padding: clamp(3.5rem, 6vw, 6rem) var(--gutter);
+      text-align: center;
+    }
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--moss);
+      max-width: 720px;
+      margin: 1.5rem auto;
+      line-height: 1.45;
+    }
+    .quote-attr { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); }
+
+    /* ─── CTA BAND ─── */
+    .cta-band { background: var(--moss); padding: clamp(3.5rem, 6vw, 6rem) var(--gutter); }
+    .cta-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 400;
+      color: var(--sand);
+      line-height: 1.2;
+    }
+    .cta-sub { color: rgba(199,205,191,0.7); margin-top: 0.7rem; font-size: 0.95rem; }
+    .cta-buttons { display: flex; gap: 1rem; flex-shrink: 0; flex-wrap: wrap; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #1e201a;
+      color: rgba(245,239,232,0.6);
+      padding: clamp(3rem, 5vw, 5rem) var(--gutter) 2rem;
+    }
+    .footer-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(245,239,232,0.08);
+    }
+    .footer-brand-name { font-family: var(--font-display); font-size: 1rem; color: var(--sand); letter-spacing: 0.06em; margin-bottom: 1rem; }
+    .footer-tagline { font-size: 0.85rem; font-style: italic; color: rgba(245,239,232,0.4); line-height: 1.7; margin-bottom: 1.4rem; }
+    .footer-contact a { display: block; font-size: 0.82rem; color: rgba(245,239,232,0.55); line-height: 1.9; transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--mist); }
+    .footer-col-title { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,239,232,0.3); margin-bottom: 1.2rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.55rem; }
+    .footer-links a { font-size: 0.85rem; color: rgba(245,239,232,0.55); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--mist); }
+    .footer-bottom { max-width: var(--max-w); margin: 1.6rem auto 0; display: flex; justify-content: space-between; font-size: 0.72rem; color: rgba(245,239,232,0.25); flex-wrap: wrap; gap: 0.5rem; }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .scope-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .intro-grid { grid-template-columns: 1fr; }
+      .plan-visual { display: none; }
+      .included-grid { grid-template-columns: 1fr; }
+      .who-grid { grid-template-columns: 1fr; }
+      .process-header { grid-template-columns: 1fr; }
+      .hoa-inner { grid-template-columns: 1fr; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .scope-grid { grid-template-columns: 1fr; }
+      .steps-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── MOBILE MENU ─── -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html" onclick="closeMobileMenu()">Home</a>
+  <a href="about.html" onclick="closeMobileMenu()">About Me</a>
+  <a href="services.html" onclick="closeMobileMenu()">Services</a>
+  <a href="3d-design.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— 3D Design</a>
+  <a href="construction-plans.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— Construction Plans</a>
+  <a href="design-liaison.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6);">— Design Liaison</a>
+  <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
+  <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
+</nav>
+
+<!-- ─── NAV ─── -->
+<header>
+  <nav aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">Outdoor Design Chick</a>
+    <ul class="nav-links">
+      <li><a href="about.html">About Me</a></li>
+      <li class="nav-dropdown">
+        <a href="services.html" class="active">
+          Services
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+            <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="dropdown-menu">
+          <a href="3d-design.html">3D Design</a>
+          <div class="dropdown-divider"></div>
+          <a href="construction-plans.html" class="active">Construction Plans</a>
+          <div class="dropdown-divider"></div>
+          <a href="design-liaison.html">Design Liaison</a>
+        </div>
+      </li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Start Your Project</a>
+    <button class="nav-toggle" onclick="openMobileMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ─── PAGE HERO ─── -->
+<div class="page-hero">
+  <svg class="hero-botanical" viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M150 480 L150 120" stroke="#F5EFE8" stroke-width="1.4"/>
+    <path d="M138 480 L138 120" stroke="#F5EFE8" stroke-width="1.4"/>
+    <path d="M138 120 C138 100 162 100 162 120" stroke="#F5EFE8" stroke-width="1.4" fill="none"/>
+    <line x1="144" y1="480" x2="144" y2="124" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <line x1="150" y1="480" x2="150" y2="102" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <line x1="156" y1="480" x2="156" y2="124" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <path d="M138 300 C122 298 110 286 104 268 C98 250 98 228 98 210 L98 175 C98 164 103 158 110 158 C117 158 122 164 122 175 L122 210 C122 222 130 230 138 234" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M98 175 C98 162 122 162 122 175" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M162 265 C178 262 190 250 196 232 C202 214 202 192 202 174 L202 139 C202 128 197 122 190 122 C183 122 178 128 178 139 L178 174 C178 186 170 194 162 198" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M178 139 C178 126 202 126 202 139" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+  </svg>
+
+  <div class="page-hero-inner">
+    <div class="reveal">
+      <p class="page-eyebrow">Services · Construction Plans</p>
+      <h1 class="page-title">Plans That Get<br>Projects Built</h1>
+      <p class="page-subtitle">Professional construction drawings and HOA submission packages that give your contractor what they need to quote accurately — and your HOA everything they need to say yes.</p>
+      <div class="hero-cta-row">
+        <a href="contact.html" class="btn-sand">Request a Quote</a>
+        <a href="#included" class="btn-ghost-light">See What's Included</a>
+      </div>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="hero-stat">
+        <p class="hero-stat-num">HOA</p>
+        <p class="hero-stat-label">Submission Ready</p>
+      </div>
+      <div class="hero-stat">
+        <p class="hero-stat-num">4</p>
+        <p class="hero-stat-label">Project Types Covered</p>
+      </div>
+      <div class="hero-stat">
+        <p class="hero-stat-num">Zero</p>
+        <p class="hero-stat-label">Guesswork for Contractors</p>
+      </div>
+      <div class="hero-stat">
+        <p class="hero-stat-num">2023</p>
+        <p class="hero-stat-label">Built on Real Field Experience</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── INTRO SPLIT ─── -->
+<section class="intro-split">
+  <div class="section-inner">
+    <div class="intro-grid">
+      <div class="intro-body reveal">
+        <p class="section-label">Why Plans Matter</p>
+        <h2 class="section-title">The Difference Between<br>a Dream and a Build</h2>
+        <p>A beautiful 3D rendering gets you excited. A proper set of construction plans gets you built. Contractors can't give you an accurate quote from a rendering alone — and HOA boards won't approve a project without the right documentation.</p>
+        <p>That's where most outdoor projects stall. Meagen's construction plans package is designed to eliminate both bottlenecks: <strong>contractor-ready drawings</strong> that let your builder quote confidently, and a <strong>complete HOA submission package</strong> that puts your application in the best possible position for approval.</p>
+        <div class="pull-quote">
+          <p>"I've been on enough job sites to know what a contractor actually needs from a set of plans. I draw them that way from the start."</p>
+        </div>
+        <p>Whether you're coming straight from Meagen's 3D design process or arriving with a design from elsewhere, construction plans can be scoped and drawn for your project.</p>
+        <a href="contact.html" class="arrow-link" style="margin-top:1.5rem; display:inline-flex;">
+          Talk to Meagen about your project
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="plan-visual reveal">
+        <!--
+          PHOTO: Replace this entire .plan-frame div with:
+          <img src="plan-example.jpg" alt="Example construction plan drawing"
+               style="position:relative;z-index:1;width:100%;aspect-ratio:4/5;object-fit:cover;" />
+        -->
+        <div class="plan-frame">
+          <div class="plan-lines">
+            <!-- Decorative blueprint lines -->
+            <svg width="100%" height="100%" viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="20" y="20" width="260" height="310" stroke="#C7CDBF" stroke-width="0.8" stroke-dasharray="4 3"/>
+              <rect x="40" y="40" width="220" height="210" stroke="#919682" stroke-width="0.8"/>
+              <rect x="60" y="60" width="80" height="80" stroke="#919682" stroke-width="0.8"/>
+              <circle cx="100" cy="100" r="30" stroke="#595E48" stroke-width="0.8"/>
+              <circle cx="100" cy="100" r="20" stroke="#C7CDBF" stroke-width="0.5" stroke-dasharray="3 2"/>
+              <rect x="155" y="65" width="90" height="55" stroke="#919682" stroke-width="0.8"/>
+              <rect x="60" y="155" width="185" height="80" stroke="#919682" stroke-width="0.8"/>
+              <line x1="40" y1="255" x2="260" y2="255" stroke="#C7CDBF" stroke-width="0.5"/>
+              <line x1="40" y1="265" x2="180" y2="265" stroke="#C7CDBF" stroke-width="0.5"/>
+              <line x1="40" y1="275" x2="200" y2="275" stroke="#C7CDBF" stroke-width="0.5"/>
+              <line x1="40" y1="285" x2="160" y2="285" stroke="#C7CDBF" stroke-width="0.5"/>
+              <line x1="40" y1="295" x2="190" y2="295" stroke="#C7CDBF" stroke-width="0.5"/>
+              <line x1="40" y1="305" x2="170" y2="305" stroke="#C7CDBF" stroke-width="0.5"/>
+              <text x="150" y="185" font-size="6" fill="#919682" text-anchor="middle" font-family="monospace">POOL / SPA</text>
+              <text x="200" y="95" font-size="6" fill="#919682" text-anchor="middle" font-family="monospace">PERGOLA</text>
+              <text x="153" y="210" font-size="6" fill="#919682" text-anchor="middle" font-family="monospace">HARDSCAPE DECK</text>
+              <text x="100" y="103" font-size="5" fill="#595E48" text-anchor="middle" font-family="monospace">SPA</text>
+              <line x1="40" y1="40" x2="40" y2="36" stroke="#919682" stroke-width="0.5"/>
+              <line x1="260" y1="40" x2="260" y2="36" stroke="#919682" stroke-width="0.5"/>
+              <line x1="40" y1="38" x2="260" y2="38" stroke="#919682" stroke-width="0.5"/>
+              <text x="150" y="34" font-size="5" fill="#919682" text-anchor="middle" font-family="monospace">22'-0"</text>
+            </svg>
+          </div>
+          <p class="plan-caption">Sample plan layout — your drawings here</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHAT'S INCLUDED ─── -->
+<section class="included" id="included">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">What's Included</p>
+      <h2 class="section-title">Everything Your Project<br>Needs to Move Forward</h2>
+    </div>
+    <div class="included-grid">
+      <div class="included-card reveal">
+        <svg class="included-icon" viewBox="0 0 36 36" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="5" y="4" width="26" height="28" rx="1"/>
+          <path d="M5 12 L31 12 M12 4 L12 32"/>
+          <path d="M18 18 L26 18 M18 22 L24 22 M18 26 L22 26"/>
+        </svg>
+        <div>
+          <h3 class="included-title">Detailed Construction Drawings</h3>
+          <p class="included-desc">Dimensioned plan view drawings showing the full layout of your outdoor space — pool and spa, hardscape zones, structures, planting areas, and drainage. Drawn to scale with all measurements a contractor needs to bid and build accurately.</p>
+        </div>
+      </div>
+      <div class="included-card reveal">
+        <svg class="included-icon" viewBox="0 0 36 36" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 30 L6 10 L18 4 L30 10 L30 30 Z"/>
+          <path d="M6 18 L30 18"/>
+          <path d="M14 30 L14 22 L22 22 L22 30"/>
+          <path d="M18 4 L18 18"/>
+        </svg>
+        <div>
+          <h3 class="included-title">Material & Finish Specifications</h3>
+          <p class="included-desc">Written specifications for every surface, structure, and feature in the design — paver type and color, pool finish, coping material, plant species and sizes, and more. No contractor has to guess what goes where.</p>
+        </div>
+      </div>
+      <div class="included-card reveal">
+        <svg class="included-icon" viewBox="0 0 36 36" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="5" y="6" width="26" height="24" rx="1"/>
+          <path d="M5 14 L31 14"/>
+          <circle cx="11" cy="10" r="1.5" fill="#595E48" opacity="0.5"/>
+          <circle cx="17" cy="10" r="1.5" fill="#595E48" opacity="0.5"/>
+          <path d="M10 20 L26 20 M10 24 L20 24"/>
+        </svg>
+        <div>
+          <h3 class="included-title">HOA Submission Package</h3>
+          <p class="included-desc">A complete, formatted package tailored to your HOA's submittal requirements — site plan, elevations, material boards, and any supporting documentation your association asks for. Prepared to give your application the best chance of approval first time.</p>
+        </div>
+      </div>
+      <div class="included-card reveal">
+        <svg class="included-icon" viewBox="0 0 36 36" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="14" r="6"/>
+          <path d="M10 30 Q10 22 18 22 Q26 22 26 30"/>
+          <path d="M24 10 Q28 12 28 16 Q28 20 24 21"/>
+          <path d="M12 10 Q8 12 8 16 Q8 20 12 21"/>
+        </svg>
+        <div>
+          <h3 class="included-title">Contractor-Ready Format</h3>
+          <p class="included-desc">Plans are delivered in formats contractors can actually use — PDF sets formatted for printing and digital markup. Meagen's construction background means these drawings reflect how things actually get built, not just how they look on paper.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHO IT'S FOR ─── -->
+<section class="who">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">Who It's For</p>
+      <h2 class="section-title">Plans for Every<br>Stage of the Process</h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-card reveal">
+        <span class="who-tag">Coming from 3D Design</span>
+        <h3 class="who-title">Your Rendering Is Approved —<br>Now Let's Make It Buildable</h3>
+        <p class="who-desc">If you've completed the 3D design process with Meagen, construction plans are the natural next step. The design is already locked in — now it gets translated into the detailed drawings your contractor and HOA need.</p>
+        <ul class="who-list">
+          <li>Seamless transition from 3D to construction docs</li>
+          <li>No re-explaining the design — Meagen already knows it</li>
+          <li>Drawings are consistent with every rendering detail</li>
+          <li>Ready for HOA submission and contractor quoting</li>
+        </ul>
+      </div>
+      <div class="who-card reveal">
+        <span class="who-tag">Coming with Your Own Design</span>
+        <h3 class="who-title">Have a Design Already?<br>Meagen Can Draw the Plans</h3>
+        <p class="who-desc">If you've worked with another designer, an architect, or a contractor who provided a concept — but you need proper construction drawings and HOA documentation — Meagen can take what you have and produce a full plan set.</p>
+        <ul class="who-list">
+          <li>Bring your existing design, sketches, or concept drawings</li>
+          <li>Plans drafted with real construction knowledge</li>
+          <li>HOA package prepared and formatted for your association</li>
+          <li>Contractor-ready from day one</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SCOPE ─── -->
+<section class="scope">
+  <div class="section-inner">
+    <p class="section-label">Project Types</p>
+    <h2 class="section-title">Construction Plans For</h2>
+    <p class="scope-sub">Plans are available for all outdoor living project types — individually or as a combined package when your project spans multiple scopes.</p>
+    <div class="scope-grid">
+      <div class="scope-card reveal">
+        <svg class="scope-icon" viewBox="0 0 28 28" fill="none" stroke="#C7CDBF" stroke-width="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 22 Q14 8 24 22Z"/>
+          <path d="M8 18 Q14 10 20 18"/>
+          <circle cx="14" cy="20" r="2"/>
+        </svg>
+        <h3 class="scope-title">Pool & Spa</h3>
+        <p class="scope-desc">Full pool and spa construction drawings including shell shape, bond beam, coping, finish specs, equipment layout, and hydraulic notes.</p>
+      </div>
+      <div class="scope-card reveal">
+        <svg class="scope-icon" viewBox="0 0 28 28" fill="none" stroke="#C7CDBF" stroke-width="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 22 Q7 10 14 14 Q21 18 24 6"/>
+          <path d="M4 22 L24 22"/>
+          <path d="M10 22 L9 17 M18 22 L19 15"/>
+        </svg>
+        <h3 class="scope-title">Landscape</h3>
+        <p class="scope-desc">Planting plans with species, quantities, spacing, and placement — plus irrigation zone notes and grade / drainage callouts.</p>
+      </div>
+      <div class="scope-card reveal">
+        <svg class="scope-icon" viewBox="0 0 28 28" fill="none" stroke="#C7CDBF" stroke-width="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="3" y="16" width="22" height="7" rx="1"/>
+          <path d="M7 16 L7 9 L21 9 L21 16"/>
+          <path d="M11 9 L11 5 L17 5 L17 9"/>
+        </svg>
+        <h3 class="scope-title">Hardscape</h3>
+        <p class="scope-desc">Paving plans showing material types, patterns, dimensions, edge conditions, and transitions between surface materials across the entire outdoor space.</p>
+      </div>
+      <div class="scope-card reveal">
+        <svg class="scope-icon" viewBox="0 0 28 28" fill="none" stroke="#C7CDBF" stroke-width="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 24 L4 10 L14 4 L24 10 L24 24 Z"/>
+          <path d="M4 14 L24 14"/>
+          <path d="M14 4 L14 24"/>
+        </svg>
+        <h3 class="scope-title">Outdoor Structures</h3>
+        <p class="scope-desc">Pergolas, ramadas, shade structures, and outdoor kitchens — plan and elevation drawings with dimensions, materials, and structural callouts for permit and HOA review.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section class="process">
+  <div class="section-inner">
+    <div class="process-header">
+      <div class="reveal">
+        <p class="section-label">The Process</p>
+        <h2 class="section-title">From Design to<br>Approved & Ready</h2>
+      </div>
+      <p class="process-body reveal">Meagen's construction plan process is straightforward by design. You share what you have, she handles the rest — producing drawings that are accurate, complete, and ready to move your project forward.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step-block reveal">
+        <span class="step-num">01</span>
+        <h3 class="step-title">Project Brief</h3>
+        <p class="step-desc">Share your 3D design, concept drawings, or project details. Meagen reviews the scope, confirms what's needed, and provides a custom quote.</p>
+      </div>
+      <div class="step-block reveal">
+        <span class="step-num">02</span>
+        <h3 class="step-title">Site & HOA Review</h3>
+        <p class="step-desc">Property dimensions, setbacks, and HOA submittal requirements are confirmed before drafting begins — so the plans are right the first time.</p>
+      </div>
+      <div class="step-block reveal">
+        <span class="step-num">03</span>
+        <h3 class="step-title">Plan Drafting</h3>
+        <p class="step-desc">Construction drawings are produced to scale with full dimensions, material specifications, and all details your contractor needs to build and bid accurately.</p>
+      </div>
+      <div class="step-block reveal">
+        <span class="step-num">04</span>
+        <h3 class="step-title">HOA Package & Delivery</h3>
+        <p class="step-desc">The complete HOA submission package is assembled and reviewed. Final plan sets are delivered in contractor-ready PDF format, organized and ready to go.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOA CALLOUT ─── -->
+<div class="hoa-band">
+  <div class="hoa-inner section-inner">
+    <div class="reveal">
+      <p class="section-label">HOA Submissions</p>
+      <h2 class="hoa-title">Stop Getting Rejected.<br>Start Getting Approved.</h2>
+      <div class="hoa-body">
+        <p>HOA rejections are one of the most common and costly delays in outdoor construction. They almost always come down to the same things: missing documentation, incorrect formatting, or drawings that don't address the association's specific requirements.</p>
+        <p>Meagen's HOA packages are built around what associations actually want to see — presented clearly, completely, and professionally.</p>
+      </div>
+    </div>
+    <div class="hoa-checks reveal">
+      <div class="hoa-check">
+        <svg class="check-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="10" cy="10" r="9" stroke="#595E48" stroke-width="1.2"/>
+          <path d="M6 10.5L8.5 13L14 7.5" stroke="#595E48" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <p class="hoa-check-title">Formatted to Your HOA's Requirements</p>
+          <p class="hoa-check-desc">Every HOA has its own submittal checklist. Meagen reviews yours before preparing the package so nothing is missing and nothing is out of spec.</p>
+        </div>
+      </div>
+      <div class="hoa-check">
+        <svg class="check-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="10" cy="10" r="9" stroke="#595E48" stroke-width="1.2"/>
+          <path d="M6 10.5L8.5 13L14 7.5" stroke="#595E48" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <p class="hoa-check-title">Site Plan, Elevations & Material Boards</p>
+          <p class="hoa-check-desc">The full visual package associations need to evaluate your project — not just a floor plan, but the complete picture of what the finished space will look like.</p>
+        </div>
+      </div>
+      <div class="hoa-check">
+        <svg class="check-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="10" cy="10" r="9" stroke="#595E48" stroke-width="1.2"/>
+          <path d="M6 10.5L8.5 13L14 7.5" stroke="#595E48" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <p class="hoa-check-title">Professional Presentation</p>
+          <p class="hoa-check-desc">A well-prepared, clearly labeled submission signals to the HOA review board that this project is serious and well-managed. First impressions matter even in paperwork.</p>
+        </div>
+      </div>
+      <div class="hoa-check">
+        <svg class="check-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="10" cy="10" r="9" stroke="#595E48" stroke-width="1.2"/>
+          <path d="M6 10.5L8.5 13L14 7.5" stroke="#595E48" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <p class="hoa-check-title">Revision Support if Needed</p>
+          <p class="hoa-check-desc">If the HOA comes back with questions or requests changes, Meagen is available to update the package and keep your approval process moving.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── QUOTE ─── -->
+<div class="quote-band">
+  <div class="section-inner">
+    <div class="divider reveal" style="margin-bottom:2rem;">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M6 0L7.5 4.5L12 6L7.5 7.5L6 12L4.5 7.5L0 6L4.5 4.5Z" fill="#C7CDBF"/>
+      </svg>
+    </div>
+    <p class="quote-text reveal">"Contractors can't build from a beautiful image. They need dimensions, materials, and detail. That's what I give them — every time."</p>
+    <p class="quote-attr reveal">— Meagen Lenhart, Outdoor Design Chick</p>
+  </div>
+</div>
+
+<!-- ─── CTA ─── -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <div class="reveal">
+      <h2 class="cta-title">Ready to Get Your<br>Project Plan-Ready?</h2>
+      <p class="cta-sub">Every package is custom-quoted based on project scope. Reach out and Meagen will get back to you personally.</p>
+    </div>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn-sand">Request a Quote</a>
+      <a href="tel:6028856917" class="btn-ghost-light">Call 602-885-6917</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-name">Outdoor Design Chick</p>
+      <p class="footer-tagline">Blurring the lines between<br>indoor and outdoor living.</p>
+      <div class="footer-contact">
+        <a href="tel:6028856917">602-885-6917</a>
+        <a href="mailto:meagen@outdoordesignchick.com">meagen@outdoordesignchick.com</a>
+        <span style="font-size:0.82rem; color:rgba(245,239,232,0.55);">Phoenix, Arizona</span>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Pages</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Services</p>
+      <ul class="footer-links">
+        <li><a href="3d-design.html">3D Design</a></li>
+        <li><a href="construction-plans.html">Construction Plans</a></li>
+        <li><a href="design-liaison.html">Design Liaison</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Follow Along</p>
+      <ul class="footer-links">
+        <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Houzz</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Pinterest</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Outdoor Design Chick · Phoenix, AZ</span>
+    <span>Design by Outdoor Design Chick</span>
+  </div>
+</footer>
+
+<script>
+  function openMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), idx * 90);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
