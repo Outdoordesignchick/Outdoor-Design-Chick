@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Outdoor Design — Outdoor Design Chick</title>
+  <meta name="description" content="Photorealistic 3D outdoor design renderings for pools, landscape, hardscape, structures and lighting in Phoenix, AZ. See your space before it's built." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /*
+    @font-face {
+      font-family: 'Garet';
+      src: url('garet.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    */
+
+    :root {
+      --sand:      #F5EFE8;
+      --sage:      #919682;
+      --mist:      #C7CDBF;
+      --moss:      #595E48;
+      --ink:       #2C2C2A;
+      --ink-light: #5a5a57;
+      --parchment: #EDE8E0;
+
+      --font-display: 'Playfair Display SC', Georgia, serif;
+      --font-body:    'Garet', 'DM Sans', 'Inter', system-ui, sans-serif;
+      --max-w: 1280px;
+      --gutter: clamp(1.5rem, 5vw, 4rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font: inherit; border: none; background: none; }
+
+    body {
+      background: var(--sand);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 auto;
+      width: fit-content;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      display: block;
+      width: clamp(60px, 8vw, 120px);
+      height: 1px;
+      background: var(--mist);
+    }
+
+    /* ─── NAV ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(245,239,232,0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 var(--mist);
+    }
+    nav {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 1.4rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      letter-spacing: 0.08em;
+      color: var(--moss);
+      line-height: 1.3;
+    }
+    .nav-links {
+      display: flex;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--moss); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .nav-dropdown > a svg { transition: transform 0.3s; }
+    .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+    .nav-links a.active { color: var(--moss); }
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 1rem);
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: rgba(245,239,232,0.98);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--mist);
+      min-width: 210px;
+      padding: 0.5rem 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 200;
+      box-shadow: 0 12px 40px rgba(44,44,42,0.1);
+    }
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -5px; left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 9px; height: 9px;
+      background: rgba(245,239,232,0.98);
+      border-top: 1px solid var(--mist);
+      border-left: 1px solid var(--mist);
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.8rem 1.4rem;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase;
+      color: var(--ink-light) !important;
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover, .dropdown-menu a.active {
+      color: var(--moss) !important;
+      background: rgba(89,94,72,0.05);
+    }
+    .dropdown-divider { height: 1px; background: var(--mist); margin: 0.4rem 1.4rem; }
+    .nav-cta {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      border: 1px solid var(--moss);
+      color: var(--moss);
+      transition: all 0.3s;
+    }
+    .nav-cta:hover { background: var(--moss); color: var(--sand); }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px; padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: var(--moss);
+    }
+
+    /* ─── MOBILE MENU ─── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(89,94,72,0.97);
+      z-index: 99;
+      padding: 6rem var(--gutter) 3rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      color: var(--sand);
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(245,239,232,0.1);
+    }
+    .mobile-close {
+      position: absolute;
+      top: 1.6rem; right: var(--gutter);
+      color: var(--sand); font-size: 1.5rem;
+    }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      padding-top: 5.5rem;
+      background: var(--moss);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-botanical {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: clamp(180px, 28vw, 380px);
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(3rem, 6vw, 6rem) var(--gutter) clamp(3rem, 5vw, 5rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: center;
+    }
+    .page-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 1.2rem;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 400;
+      color: var(--sand);
+      line-height: 1.1;
+      margin-bottom: 1.4rem;
+    }
+    .page-subtitle {
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: rgba(199,205,191,0.8);
+      line-height: 1.8;
+      max-width: 46ch;
+      margin-bottom: 2rem;
+    }
+    .hero-cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-sand {
+      padding: 1rem 2.2rem;
+      background: var(--sand);
+      color: var(--moss);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+    .btn-sand:hover { background: var(--mist); }
+    .btn-ghost-light {
+      padding: 1rem 2.2rem;
+      border: 1px solid rgba(245,239,232,0.35);
+      color: var(--sand);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .btn-ghost-light:hover { border-color: var(--sand); background: rgba(245,239,232,0.08); }
+
+    /* Hero feature list */
+    .hero-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .hero-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem 1.4rem;
+      background: rgba(245,239,232,0.06);
+      border: 1px solid rgba(199,205,191,0.15);
+    }
+    .hero-feature-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .hero-feature-title {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--sand);
+      margin-bottom: 0.2rem;
+    }
+    .hero-feature-desc {
+      font-size: 0.82rem;
+      color: rgba(199,205,191,0.7);
+      line-height: 1.6;
+    }
+
+    /* ─── SECTION SHELL ─── */
+    section { padding: clamp(4rem, 7vw, 7rem) var(--gutter); }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+
+    /* ─── WHAT YOU GET ─── */
+    .deliverables { background: var(--sand); }
+    .deliverables-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: end;
+      margin-bottom: clamp(3rem, 5vw, 5rem);
+    }
+    .deliverables-body {
+      color: var(--ink-light);
+      line-height: 1.9;
+    }
+    .deliverables-body p { margin-bottom: 1.2rem; }
+    .deliverables-body p:last-child { margin-bottom: 0; }
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--mist);
+    }
+    .deliverable-card {
+      background: var(--sand);
+      padding: clamp(1.8rem, 3vw, 2.8rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: background 0.3s;
+    }
+    .deliverable-card:hover { background: var(--parchment); }
+    .deliverable-num {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      color: var(--mist);
+    }
+    .deliverable-icon {
+      width: 30px; height: 30px;
+      opacity: 0.55;
+    }
+    .deliverable-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .deliverable-desc {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+      flex: 1;
+    }
+
+    /* ─── GALLERY ─── */
+    .gallery { background: var(--parchment); }
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+    .g-item {
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .g-item:nth-child(1) { grid-column: 1 / 8; }
+    .g-item:nth-child(2) { grid-column: 8 / 13; }
+    .g-item:nth-child(3) { grid-column: 1 / 5; }
+    .g-item:nth-child(4) { grid-column: 5 / 9; }
+    .g-item:nth-child(5) { grid-column: 9 / 13; }
+    .g-thumb {
+      width: 100%;
+      aspect-ratio: unset;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      display: block;
+    }
+    .g-item:nth-child(1) .g-thumb,
+    .g-item:nth-child(2) .g-thumb { aspect-ratio: 16/10; }
+    .g-item:nth-child(3) .g-thumb,
+    .g-item:nth-child(4) .g-thumb,
+    .g-item:nth-child(5) .g-thumb { aspect-ratio: 4/3; }
+    .g-item:hover .g-thumb { transform: scale(1.04); }
+    .g-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44,44,42,0.6) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem 1.4rem;
+    }
+    .g-item:hover .g-overlay { opacity: 1; }
+    .g-label {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--sand);
+    }
+    /* Placeholders */
+    .g-ph { width: 100%; display: block; }
+    .g-ph-1 { background: linear-gradient(135deg, #7a8268 0%, #595E48 100%); aspect-ratio: 16/10; }
+    .g-ph-2 { background: linear-gradient(135deg, #919682 0%, #7a8268 100%); aspect-ratio: 16/10; }
+    .g-ph-3 { background: linear-gradient(135deg, #b5bca8 0%, #919682 100%); aspect-ratio: 4/3; }
+    .g-ph-4 { background: linear-gradient(135deg, #8a9077 0%, #6d7260 100%); aspect-ratio: 4/3; }
+    .g-ph-5 { background: linear-gradient(135deg, #a8b09a 0%, #7a8268 100%); aspect-ratio: 4/3; }
+
+    /* Video placeholder */
+    .video-row {
+      margin-top: 1rem;
+      position: relative;
+      background: #2C2C2A;
+      aspect-ratio: 16/7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .video-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #3d4232, #595E48);
+      opacity: 0.8;
+    }
+    .video-play {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .play-btn {
+      width: 72px; height: 72px;
+      border: 1.5px solid rgba(245,239,232,0.6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .video-row:hover .play-btn {
+      border-color: var(--sand);
+      background: rgba(245,239,232,0.1);
+    }
+    .play-label {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: rgba(245,239,232,0.7);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── PROCESS ─── */
+    .process { background: var(--sand); }
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: clamp(3rem, 6vw, 8rem);
+      align-items: start;
+    }
+    .process-sticky { position: sticky; top: 7rem; }
+    .process-steps { display: flex; flex-direction: column; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1.5rem;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid var(--mist);
+      align-items: start;
+    }
+    .process-step:first-child { border-top: 1px solid var(--mist); }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--mist);
+      padding-top: 0.2rem;
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+    }
+
+    /* ─── SCOPE ─── */
+    .scope { background: var(--moss); }
+    .scope .section-label { color: var(--mist); }
+    .scope .section-title { color: var(--sand); }
+    .scope-intro { color: rgba(199,205,191,0.75); max-width: 52ch; line-height: 1.85; margin-bottom: clamp(2.5rem, 4vw, 4rem); }
+    .scope-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(245,239,232,0.1);
+    }
+    .scope-card {
+      background: var(--moss);
+      padding: 2rem 2.2rem;
+      transition: background 0.3s;
+    }
+    .scope-card:hover { background: #4d5240; }
+    .scope-icon {
+      width: 28px; height: 28px;
+      margin-bottom: 1rem;
+      opacity: 0.65;
+    }
+    .scope-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--sand);
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+    .scope-desc {
+      font-size: 0.85rem;
+      color: rgba(199,205,191,0.65);
+      line-height: 1.8;
+    }
+
+    /* ─── PULL QUOTE ─── */
+    .quote-band {
+      background: var(--parchment);
+      padding: clamp(3.5rem, 6vw, 6rem) var(--gutter);
+      text-align: center;
+    }
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--moss);
+      max-width: 700px;
+      margin: 1.5rem auto;
+      line-height: 1.45;
+    }
+    .quote-attr {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+    }
+
+    /* ─── CTA BAND ─── */
+    .cta-band {
+      background: var(--moss);
+      padding: clamp(3.5rem, 6vw, 6rem) var(--gutter);
+    }
+    .cta-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 400;
+      color: var(--sand);
+      line-height: 1.2;
+    }
+    .cta-sub { color: rgba(199,205,191,0.7); margin-top: 0.7rem; font-size: 0.95rem; }
+    .cta-buttons { display: flex; gap: 1rem; flex-shrink: 0; flex-wrap: wrap; }
+
+    /* Arrow link */
+    .arrow-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--moss);
+      border-bottom: 1px solid var(--mist);
+      padding-bottom: 0.2rem;
+      transition: border-color 0.3s, gap 0.3s;
+    }
+    .arrow-link:hover { border-color: var(--moss); gap: 1rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #1e201a;
+      color: rgba(245,239,232,0.6);
+      padding: clamp(3rem, 5vw, 5rem) var(--gutter) 2rem;
+    }
+    .footer-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(245,239,232,0.08);
+    }
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--sand);
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+    .footer-tagline {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(245,239,232,0.4);
+      line-height: 1.7;
+      margin-bottom: 1.4rem;
+    }
+    .footer-contact a {
+      display: block;
+      font-size: 0.82rem;
+      color: rgba(245,239,232,0.55);
+      line-height: 1.9;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--mist); }
+    .footer-col-title {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,239,232,0.3);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.55rem; }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: rgba(245,239,232,0.55);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--mist); }
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin: 1.6rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: rgba(245,239,232,0.25);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ─── REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .deliverables-intro { grid-template-columns: 1fr; }
+      .deliverables-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .g-item:nth-child(1) { grid-column: 1 / 3; }
+      .g-item:nth-child(2) { grid-column: 1 / 3; }
+      .g-item:nth-child(3),
+      .g-item:nth-child(4),
+      .g-item:nth-child(5) { grid-column: auto; }
+      .process-grid { grid-template-columns: 1fr; }
+      .process-sticky { position: static; }
+      .scope-grid { grid-template-columns: 1fr 1fr; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .deliverables-grid { grid-template-columns: 1fr; }
+      .scope-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .g-item:nth-child(1),
+      .g-item:nth-child(2),
+      .g-item:nth-child(3),
+      .g-item:nth-child(4),
+      .g-item:nth-child(5) { grid-column: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .g-item:hover .g-thumb { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── MOBILE MENU ─── -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html" onclick="closeMobileMenu()">Home</a>
+  <a href="about.html" onclick="closeMobileMenu()">About Me</a>
+  <a href="services.html" onclick="closeMobileMenu()">Services</a>
+  <a href="3d-design.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— 3D Design</a>
+  <a href="construction-plans.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— Construction Plans</a>
+  <a href="design-liaison.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6);">— Design Liaison</a>
+  <a href="gallery.html" onclick="closeMobileMenu()">Gallery</a>
+  <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
+</nav>
+
+<!-- ─── NAV ─── -->
+<header>
+  <nav aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">Outdoor Design Chick</a>
+    <ul class="nav-links">
+      <li><a href="about.html">About Me</a></li>
+      <li class="nav-dropdown">
+        <a href="services.html" class="active">
+          Services
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+            <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="dropdown-menu">
+          <a href="3d-design.html" class="active">3D Design</a>
+          <div class="dropdown-divider"></div>
+          <a href="construction-plans.html">Construction Plans</a>
+          <div class="dropdown-divider"></div>
+          <a href="design-liaison.html">Design Liaison</a>
+        </div>
+      </li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Start Your Project</a>
+    <button class="nav-toggle" onclick="openMobileMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ─── PAGE HERO ─── -->
+<div class="page-hero">
+  <!-- Botanical ghost -->
+  <svg class="hero-botanical" viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M150 480 L150 120" stroke="#F5EFE8" stroke-width="1.4"/>
+    <path d="M138 480 L138 120" stroke="#F5EFE8" stroke-width="1.4"/>
+    <path d="M138 120 C138 100 162 100 162 120" stroke="#F5EFE8" stroke-width="1.4" fill="none"/>
+    <line x1="144" y1="480" x2="144" y2="124" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <line x1="150" y1="480" x2="150" y2="102" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <line x1="156" y1="480" x2="156" y2="124" stroke="#F5EFE8" stroke-width="0.5" opacity="0.4"/>
+    <path d="M138 300 C126 298 116 290 110 275 C104 260 104 240 104 224 L104 190 C104 180 108 175 114 175 C120 175 124 180 124 190 L124 224 C124 236 130 242 138 246" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M104 190 C104 178 124 178 124 190" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M162 270 C174 268 184 258 190 243 C196 228 196 208 196 192 L196 158 C196 148 192 143 186 143 C180 143 176 148 176 158 L176 192 C176 204 170 210 162 214" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+    <path d="M176 158 C176 146 196 146 196 158" stroke="#F5EFE8" stroke-width="1.3" fill="none"/>
+  </svg>
+
+  <div class="page-hero-inner">
+    <div class="reveal">
+      <p class="page-eyebrow">Services · 3D Design</p>
+      <h1 class="page-title">See It Before<br>It's Built</h1>
+      <p class="page-subtitle">Photorealistic 3D renderings that bring your outdoor space to life — every angle, every material, every detail — before a single permit is filed or a shovel hits the ground.</p>
+      <div class="hero-cta-row">
+        <a href="contact.html" class="btn-sand">Request a Quote</a>
+        <a href="#gallery" class="btn-ghost-light">View Renderings</a>
+      </div>
+    </div>
+    <div class="hero-features reveal">
+      <div class="hero-feature">
+        <svg class="hero-feature-icon" viewBox="0 0 32 32" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="4" y="4" width="24" height="24" rx="1"/>
+          <path d="M4 12 L28 12 M12 4 L12 28"/>
+          <circle cx="20" cy="20" r="3"/>
+        </svg>
+        <div>
+          <p class="hero-feature-title">Multiple Angles</p>
+          <p class="hero-feature-desc">Aerial views, eye-level perspectives, and detail shots so you see every corner of your space.</p>
+        </div>
+      </div>
+      <div class="hero-feature">
+        <svg class="hero-feature-icon" viewBox="0 0 32 32" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="16" cy="16" r="11"/>
+          <path d="M16 8 L16 16 L21 20"/>
+          <path d="M8 16 Q8 8 16 6"/>
+          <path d="M24 16 Q24 24 16 26"/>
+        </svg>
+        <div>
+          <p class="hero-feature-title">Day & Night Views</p>
+          <p class="hero-feature-desc">See your space in golden-hour daylight and lit up at night — so lighting design is never a guessing game.</p>
+        </div>
+      </div>
+      <div class="hero-feature">
+        <svg class="hero-feature-icon" viewBox="0 0 32 32" fill="none" stroke="#C7CDBF" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 26 L6 10 L16 4 L26 10 L26 26 Z"/>
+          <rect x="12" y="17" width="8" height="9"/>
+          <path d="M10 16 L16 11 L22 16"/>
+        </svg>
+        <div>
+          <p class="hero-feature-title">Design Video</p>
+          <p class="hero-feature-desc">A walkthrough video of your finished space — shareable with family, contractors, and HOA reviewers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── WHAT YOU RECEIVE ─── -->
+<section class="deliverables">
+  <div class="section-inner">
+    <div class="deliverables-intro">
+      <div class="reveal">
+        <p class="section-label">What You Receive</p>
+        <h2 class="section-title">A Complete Visual<br>Package for Your Project</h2>
+      </div>
+      <div class="deliverables-body reveal">
+        <p>Every 3D design package from Outdoor Design Chick is built around one goal: giving you total clarity before you commit to construction. No surprises, no misalignments between what you imagined and what gets built.</p>
+        <p>Pricing is custom-quoted per project based on scope and complexity. <a href="contact.html" style="color:var(--moss); border-bottom: 1px solid var(--mist);">Reach out to get started.</a></p>
+      </div>
+    </div>
+    <div class="deliverables-grid">
+      <div class="deliverable-card reveal">
+        <span class="deliverable-num">01</span>
+        <svg class="deliverable-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="3" y="3" width="24" height="24" rx="1"/>
+          <path d="M3 11 L27 11 M11 3 L11 27"/>
+          <circle cx="19" cy="19" r="3.5"/>
+        </svg>
+        <h3 class="deliverable-title">Photorealistic Renderings</h3>
+        <p class="deliverable-desc">High-resolution still images of your outdoor space from multiple angles — indistinguishable from a finished photograph. Share with anyone and they'll see exactly what's coming.</p>
+      </div>
+      <div class="deliverable-card reveal">
+        <svg class="deliverable-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="15" cy="12" r="8"/>
+          <path d="M13 9 L19 12 L13 15 Z" fill="#595E48" opacity="0.5"/>
+          <path d="M8 26 Q8 20 15 20 Q22 20 22 26"/>
+        </svg>
+        <span class="deliverable-num">02</span>
+        <h3 class="deliverable-title">Design Walkthrough Video</h3>
+        <p class="deliverable-desc">A cinematic flythrough of your completed space. Perfect for sharing with contractors to align on the vision, presenting to HOA boards, or simply showing family what's on the way.</p>
+      </div>
+      <div class="deliverable-card reveal">
+        <span class="deliverable-num">03</span>
+        <svg class="deliverable-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="15" cy="10" r="5"/>
+          <path d="M5 26 Q5 18 15 18 Q25 18 25 26"/>
+          <path d="M21 7 L25 9 M21 10 L25 10 M21 13 L25 11"/>
+        </svg>
+        <h3 class="deliverable-title">Day & Night Views</h3>
+        <p class="deliverable-desc">See your space in two completely different lights. Daytime renderings showcase materials and layout; nighttime views reveal the full impact of your lighting plan and create the ambiance you're after.</p>
+      </div>
+      <div class="deliverable-card reveal">
+        <span class="deliverable-num">04</span>
+        <svg class="deliverable-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="4" y="6" width="22" height="18" rx="1"/>
+          <path d="M4 12 L26 12"/>
+          <path d="M10 6 L10 24 M20 6 L20 24"/>
+        </svg>
+        <h3 class="deliverable-title">Material & Finish Callouts</h3>
+        <p class="deliverable-desc">Each rendering includes notations for the materials, finishes, and products specified in your design — so your contractor quotes the right things from the start.</p>
+      </div>
+      <div class="deliverable-card reveal">
+        <span class="deliverable-num">05</span>
+        <svg class="deliverable-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M5 25 L5 8 L15 3 L25 8 L25 25 Z"/>
+          <path d="M10 25 L10 17 L15 14 L20 17 L20 25"/>
+          <path d="M12 13 L18 13"/>
+        </svg>
+        <h3 class="deliverable-title">Full Outdoor Living Scope</h3>
+        <p class="deliverable-desc">Pool and water features, landscape and planting, hardscape and paving, structures like pergolas and shade sails, outdoor kitchens, and lighting — all designed and rendered as one cohesive space.</p>
+      </div>
+      <div class="deliverable-card reveal">
+        <span class="deliverable-num">06</span>
+        <svg class="deliverable-icon" viewBox="0 0 30 30" fill="none" stroke="#595E48" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M5 25 L15 5 L25 25 Z"/>
+          <path d="M9 19 L21 19"/>
+          <circle cx="15" cy="22" r="1.5" fill="#595E48" opacity="0.5"/>
+        </svg>
+        <h3 class="deliverable-title">Bridge to Construction</h3>
+        <p class="deliverable-desc">Your 3D design is the foundation for everything that follows — construction plans, permit applications, and contractor quoting. It's the first step in a process Meagen sees all the way through.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section class="gallery" id="gallery">
+  <div class="section-inner">
+    <div class="gallery-header">
+      <div class="reveal">
+        <p class="section-label">3D Design Work</p>
+        <h2 class="section-title">Renderings That<br>Speak for Themselves</h2>
+      </div>
+      <a href="gallery.html" class="arrow-link reveal">
+        Full Gallery
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <div class="gallery-grid reveal">
+      <!--
+        PHOTOS: Replace each .g-ph div with:
+        <img class="g-thumb" src="rendering-1.jpg" alt="3D rendering description" />
+      -->
+      <div class="g-item">
+        <div class="g-ph g-ph-1"></div>
+        <div class="g-overlay"><span class="g-label">Paradise Valley · Pool & Landscape</span></div>
+      </div>
+      <div class="g-item">
+        <div class="g-ph g-ph-2"></div>
+        <div class="g-overlay"><span class="g-label">Scottsdale · Night Rendering</span></div>
+      </div>
+      <div class="g-item">
+        <div class="g-ph g-ph-3"></div>
+        <div class="g-overlay"><span class="g-label">Arcadia · Hardscape Detail</span></div>
+      </div>
+      <div class="g-item">
+        <div class="g-ph g-ph-4"></div>
+        <div class="g-overlay"><span class="g-label">Phoenix · Outdoor Kitchen</span></div>
+      </div>
+      <div class="g-item">
+        <div class="g-ph g-ph-5"></div>
+        <div class="g-overlay"><span class="g-label">Chandler · Full Backyard</span></div>
+      </div>
+    </div>
+
+    <!-- Video row -->
+    <div class="video-row reveal" role="button" aria-label="Play design walkthrough video">
+      <div class="video-bg"></div>
+      <div class="video-play">
+        <div class="play-btn">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+            <path d="M8 5L18 11L8 17V5Z" fill="rgba(245,239,232,0.85)"/>
+          </svg>
+        </div>
+        <!--
+          VIDEO: Replace this entire .video-row div with an embedded video or link:
+          <video src="walkthrough.mp4" controls poster="poster.jpg"></video>
+          Or embed a Vimeo/YouTube iframe.
+        -->
+        <p class="play-label">Design Walkthrough Video</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section class="process">
+  <div class="section-inner">
+    <div class="process-grid">
+      <div class="process-sticky reveal">
+        <p class="section-label">How It Works</p>
+        <h2 class="section-title">From Conversation<br>to Full 3D Vision</h2>
+        <p style="color:var(--ink-light); font-size:0.95rem; line-height:1.85; margin-top:1rem; max-width:36ch;">
+          Every rendering starts with listening. Meagen takes the time to understand how you live, what you love, and what your property allows — before a single line is drawn.
+        </p>
+        <a href="contact.html" class="arrow-link" style="margin-top:2rem; display:inline-flex;">
+          Start your project
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <span class="step-num">01</span>
+          <div>
+            <h3 class="step-title">Discovery Call</h3>
+            <p class="step-desc">We talk through your wishlist, your lifestyle, your timeline, and your budget range. No forms, no pressure — just a real conversation about what your outdoor space can become.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">02</span>
+          <div>
+            <h3 class="step-title">Site & Property Review</h3>
+            <p class="step-desc">Meagen reviews your property dimensions, existing structures, sun orientation, HOA covenants, and city setbacks — everything that shapes what's possible before the design begins.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">03</span>
+          <div>
+            <h3 class="step-title">Concept & Layout</h3>
+            <p class="step-desc">Initial floor plan and design direction developed — pool shape, hardscape zones, structure placement, planting areas, and lighting strategy all mapped out in two dimensions first.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">04</span>
+          <div>
+            <h3 class="step-title">3D Build & Rendering</h3>
+            <p class="step-desc">Your space is modeled in full 3D with real materials, textures, plants at scale, and accurate lighting. Multiple camera angles are rendered — aerial, eye-level, detail shots — in both day and night modes.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">05</span>
+          <div>
+            <h3 class="step-title">Walkthrough Video</h3>
+            <p class="step-desc">A cinematic video flies through your completed space so you can experience it in motion — not just as a still image. Ideal for sharing with family, contractors, and HOA reviewers.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">06</span>
+          <div>
+            <h3 class="step-title">Revisions & Sign-Off</h3>
+            <p class="step-desc">Review your renderings and share feedback. Meagen refines until the design is exactly right — because what gets approved here is what moves forward to construction plans and contractor quoting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SCOPE ─── -->
+<section class="scope">
+  <div class="section-inner">
+    <p class="section-label">What We Design</p>
+    <h2 class="section-title">Every Element of<br>Your Outdoor Living Space</h2>
+    <p class="scope-intro">From the water to the walls, every feature is designed together — so nothing looks like an afterthought and everything works as one.</p>
+    <div class="scope-grid">
+      <div class="scope-card reveal">
+        <svg class="scope-icon" viewBox="0 0 28 28" fill="none" stroke="#C7CDBF" stroke-width="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 22 Q14 8 24 22Z"/>
+          <path d="M8 18 Q14 10 20 18"/>
+          <circle cx="14" cy="21" r="2"/>
+        </svg>
+        <h3 class="scope-title">Pool & Water Features</h3>
+        <p class="scope-desc">Custom pool shapes, spas, water walls, raised bond beams, sun shelves, and water features — designed to anchor the entire space.</p>
+      </div>
+      <div class="scope-card reveal">
+        <svg class="scope-icon" viewBox="0 0 28 28" fill="none" stroke="#C7CDBF" stroke-width="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 22 Q7 10 14 14 Q21 18 24 6"/>
+          <path d="M4 22 L24 22"/>
+          <path d="M10 22 L9 17 M18 22 L19 15"/>
+        </svg>
+        <h3 class="scope-title">Landscape & Planting</h3>
+        <p class="scope-desc">Desert-native and resort-style planting plans, scaled to your lot and rendered in full color — grasses, palms, succulents, and shade trees placed with intention.</p>
+      </div>
+      <div class="scope-card reveal">
+        <svg class="scope-icon" viewBox="0 0 28 28" fill="none" stroke="#C7CDBF" stroke-width="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="3" y="16" width="22" height="7" rx="1"/>
+          <path d="M7 16 L7 9 L21 9 L21 16"/>
+          <path d="M11 9 L11 5 L17 5 L17 9"/>
+        </svg>
+        <h3 class="scope-title">Hardscape & Paving</h3>
+        <p class="scope-desc">Pavers, decking, concrete finishes, retaining walls, steps, and pathways — every surface material selected and visualized in context.</p>
+      </div>
+      <div class="scope-card reveal">
+        <svg class="scope-icon" viewBox="0 0 28 28" fill="none" stroke="#C7CDBF" stroke-width="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 24 L4 10 L14 4 L24 10 L24 24 Z"/>
+          <path d="M4 14 L24 14"/>
+          <path d="M14 4 L14 24"/>
+        </svg>
+        <h3 class="scope-title">Structures & Shade</h3>
+        <p class="scope-desc">Pergolas, ramadas, shade sails, gazebos, and covered outdoor rooms — designed to extend your living space and complement your home's architecture.</p>
+      </div>
+      <div class="scope-card reveal">
+        <svg class="scope-icon" viewBox="0 0 28 28" fill="none" stroke="#C7CDBF" stroke-width="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="6" y="10" width="16" height="12" rx="1"/>
+          <path d="M10 10 L10 7 L18 7 L18 10"/>
+          <path d="M10 16 L18 16 M10 19 L15 19"/>
+        </svg>
+        <h3 class="scope-title">Outdoor Kitchen & Living</h3>
+        <p class="scope-desc">BBQ islands, bar seating, fire pits, fireplaces, and lounge zones — every entertainment feature positioned and designed for how you actually host.</p>
+      </div>
+      <div class="scope-card reveal">
+        <svg class="scope-icon" viewBox="0 0 28 28" fill="none" stroke="#C7CDBF" stroke-width="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="14" cy="14" r="4"/>
+          <path d="M14 4 L14 7 M14 21 L14 24 M4 14 L7 14 M21 14 L24 14"/>
+          <path d="M7 7 L9.5 9.5 M18.5 18.5 L21 21 M7 21 L9.5 18.5 M18.5 9.5 L21 7"/>
+        </svg>
+        <h3 class="scope-title">Lighting Design</h3>
+        <p class="scope-desc">Pathway lighting, pool and water illumination, uplighting for trees and structures, and ambient mood lighting — all shown in the night rendering so you see the atmosphere before you buy a fixture.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PULL QUOTE ─── -->
+<div class="quote-band">
+  <div class="section-inner">
+    <div class="divider reveal" style="margin-bottom:2rem;">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M6 0L7.5 4.5L12 6L7.5 7.5L6 12L4.5 7.5L0 6L4.5 4.5Z" fill="#C7CDBF"/>
+      </svg>
+    </div>
+    <p class="quote-text reveal">"When clients see their 3D rendering for the first time, something shifts. Their ideas become real — and they move forward with total confidence."</p>
+    <p class="quote-attr reveal">— Meagen Lenhart, Outdoor Design Chick</p>
+  </div>
+</div>
+
+<!-- ─── CTA ─── -->
+<div class="cta-band">
+  <div class="cta-inner section-inner">
+    <div class="reveal">
+      <h2 class="cta-title">Ready to See Your<br>Space in 3D?</h2>
+      <p class="cta-sub">Every project is custom-quoted. Reach out and Meagen will get back to you personally.</p>
+    </div>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn-sand">Request a Quote</a>
+      <a href="tel:6028856917" class="btn-ghost-light">Call 602-885-6917</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-name">Outdoor Design Chick</p>
+      <p class="footer-tagline">Blurring the lines between<br>indoor and outdoor living.</p>
+      <div class="footer-contact">
+        <a href="tel:6028856917">602-885-6917</a>
+        <a href="mailto:meagen@outdoordesignchick.com">meagen@outdoordesignchick.com</a>
+        <span style="font-size:0.82rem; color:rgba(245,239,232,0.55);">Phoenix, Arizona</span>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Pages</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Services</p>
+      <ul class="footer-links">
+        <li><a href="3d-design.html">3D Design</a></li>
+        <li><a href="construction-plans.html">Construction Plans</a></li>
+        <li><a href="design-liaison.html">Design Liaison</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Follow Along</p>
+      <ul class="footer-links">
+        <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Houzz</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Pinterest</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Outdoor Design Chick · Phoenix, AZ</span>
+    <span>Design by Outdoor Design Chick</span>
+  </div>
+</footer>
+
+<script>
+  function openMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), idx * 90);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
