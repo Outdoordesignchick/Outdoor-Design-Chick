@@ -174,17 +174,21 @@
     .mobile-menu {
       display: none;
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: rgba(89,94,72,0.97);
       z-index: 99;
       padding: 5rem var(--gutter) 3rem;
       flex-direction: column;
       gap: 0;
       overflow-y: auto;
-      max-height: 100vh;
-      width: 100%;
+      -webkit-overflow-scrolling: touch;
     }
-    .mobile-menu.open { display: flex; }
+    .mobile-menu.open {
+      display: flex;
+    }
     .mobile-menu a {
       font-family: var(--font-display);
       font-size: clamp(1.6rem, 5vw, 2.2rem);
@@ -196,18 +200,18 @@
       width: 100%;
     }
     .mobile-close {
-      position: fixed;
-      top: 1.4rem;
-      right: var(--gutter);
-      color: var(--sand);
-      font-size: 1.6rem;
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
       background: none;
       border: none;
       cursor: pointer;
-      z-index: 200;
-      line-height: 1;
+      z-index: 10;
       padding: 0.5rem;
       -webkit-tap-highlight-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* ─── PAGE HERO ─── */
@@ -778,7 +782,11 @@
 
 <!-- ─── MOBILE MENU ─── -->
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
-  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 6L18 18M6 18L18 6" stroke="#F5EFE8" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </button>
   <a href="index.html" onclick="closeMobileMenu()">Home</a>
   <a href="about.html" onclick="closeMobileMenu()">About Me</a>
   <button class="mobile-services-toggle" onclick="toggleMobileServices(event)">
@@ -1234,6 +1242,9 @@
     document.getElementById('mobileMenu').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
+  document.getElementById('mobileMenu').addEventListener('click', function(e) {
+    if (e.target === this) closeMobileMenu();
+  });
   function closeMobileMenu() {
     document.getElementById('mobileMenu').classList.remove('open');
     document.body.style.overflow = '';
