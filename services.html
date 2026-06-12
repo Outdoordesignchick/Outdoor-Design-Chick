@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Outdoor Design Chick</title>
+  <meta name="description" content="Outdoor design services including 3D design, construction plans, and design liaison. Based in Arizona, designing worldwide." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sand: #F5EFE8; --sage: #919682; --mist: #C7CDBF;
+      --moss: #595E48; --ink: #2C2C2A; --ink-light: #5a5a57;
+      --parchment: #EDE8E0;
+      --font-display: 'Playfair Display SC', Georgia, serif;
+      --font-body: 'Garet', 'DM Sans', 'Inter', system-ui, sans-serif;
+      --max-w: 1280px; --gutter: clamp(1.5rem, 5vw, 4rem);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font: inherit; border: none; background: none; }
+    body {
+      background: var(--sand); color: var(--ink);
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+      line-height: 1.75; -webkit-font-smoothing: antialiased;
+    }
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245,239,232,0.96); backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 var(--mist);
+    }
+    nav {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 1.4rem var(--gutter);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: var(--font-display); font-size: clamp(0.85rem, 1.2vw, 1rem); letter-spacing: 0.08em; color: var(--moss); line-height: 1.3; }
+    .nav-links { display: flex; gap: clamp(1.5rem, 3vw, 2.5rem); list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); transition: color 0.3s; display: flex; align-items: center; gap: 0.35rem; }
+    .nav-links a:hover, .nav-links a.active { color: var(--moss); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 0.35rem; }
+    .nav-dropdown > a svg { transition: transform 0.3s; }
+    .nav-dropdown:hover > a svg { transform: rotate(180deg); }
+    .dropdown-menu {
+      position: absolute; top: calc(100% + 1rem); left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: rgba(245,239,232,0.98); backdrop-filter: blur(12px);
+      border: 1px solid var(--mist); min-width: 210px; padding: 0.5rem 0;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 200; box-shadow: 0 12px 40px rgba(44,44,42,0.1);
+    }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu::before {
+      content: ''; position: absolute; top: -5px; left: 50%;
+      transform: translateX(-50%) rotate(45deg); width: 9px; height: 9px;
+      background: rgba(245,239,232,0.98); border-top: 1px solid var(--mist); border-left: 1px solid var(--mist);
+    }
+    .dropdown-menu a { display: block; padding: 0.8rem 1.4rem; font-size: 0.78rem !important; letter-spacing: 0.12em !important; text-transform: uppercase; color: var(--ink-light) !important; transition: color 0.2s, background 0.2s; white-space: nowrap; }
+    .dropdown-menu a:hover, .dropdown-menu a.active { color: var(--moss) !important; background: rgba(89,94,72,0.05); }
+    .dropdown-divider { height: 1px; background: var(--mist); margin: 0.4rem 1.4rem; }
+    .nav-cta { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1.4rem; border: 1px solid var(--moss); color: var(--moss); transition: all 0.3s; }
+    .nav-cta:hover { background: var(--moss); color: var(--sand); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 1.5px; background: var(--moss); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: rgba(89,94,72,0.97); z-index: 99;
+      padding: 6rem var(--gutter) 3rem; flex-direction: column; gap: 0.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--font-display); font-size: clamp(1.6rem, 5vw, 2.2rem); color: var(--sand); padding: 0.8rem 0; border-bottom: 1px solid rgba(245,239,232,0.1); }
+    .mobile-close { position: absolute; top: 1.6rem; right: var(--gutter); color: var(--sand); font-size: 1.5rem; }
+    .mobile-sub-link {
+      font-size: clamp(1rem, 3vw, 1.3rem) !important;
+      padding-left: 1.5rem !important;
+      color: rgba(245,239,232,0.6) !important;
+    }
+    .page-hero {
+      padding-top: 5.5rem; background: var(--moss);
+      position: relative; overflow: hidden;
+    }
+    .page-hero-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: clamp(3rem, 6vw, 6rem) var(--gutter) clamp(3rem, 5vw, 5rem);
+    }
+    .page-eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mist); margin-bottom: 1.2rem; }
+    .page-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 400; color: var(--sand); line-height: 1.1; margin-bottom: 1.2rem; }
+    .page-subtitle { font-size: clamp(0.95rem, 1.3vw, 1.05rem); color: rgba(199,205,191,0.8); line-height: 1.8; max-width: 52ch; }
+    .services-section { padding: clamp(4rem, 7vw, 7rem) var(--gutter); background: var(--sand); }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(2rem, 4vw, 3rem); margin-top: clamp(2.5rem, 4vw, 4rem); }
+    .service-card {
+      padding: 2.4rem; border: 1px solid var(--mist);
+      display: flex; flex-direction: column; gap: 1.2rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover { border-color: var(--sage); box-shadow: 0 8px 32px rgba(44,44,42,0.06); }
+    .service-num { font-family: var(--font-display); font-size: 0.8rem; color: var(--mist); }
+    .service-title { font-family: var(--font-display); font-size: clamp(1.1rem, 1.8vw, 1.4rem); font-weight: 400; color: var(--ink); line-height: 1.2; }
+    .service-desc { font-size: 0.9rem; color: var(--ink-light); line-height: 1.85; flex: 1; }
+    .service-link { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--moss); border-bottom: 1px solid var(--mist); padding-bottom: 0.2rem; transition: border-color 0.3s, gap 0.3s; margin-top: auto; }
+    .service-link:hover { border-color: var(--moss); gap: 1rem; }
+    .cta-band { background: var(--moss); padding: clamp(3.5rem, 6vw, 6rem) var(--gutter); }
+    .cta-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+    .cta-title { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 400; color: var(--sand); line-height: 1.2; }
+    .cta-sub { color: rgba(199,205,191,0.7); margin-top: 0.7rem; font-size: 0.95rem; }
+    .cta-buttons { display: flex; gap: 1rem; flex-shrink: 0; flex-wrap: wrap; }
+    .btn-sand { padding: 1rem 2.2rem; background: var(--sand); color: var(--moss); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.3s; white-space: nowrap; display: inline-block; }
+    .btn-sand:hover { background: var(--mist); }
+    .btn-ghost-light { padding: 1rem 2.2rem; border: 1px solid rgba(245,239,232,0.35); color: var(--sand); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; transition: all 0.3s; white-space: nowrap; display: inline-block; }
+    .btn-ghost-light:hover { border-color: var(--sand); background: rgba(245,239,232,0.08); }
+    footer { background: #1e201a; color: rgba(245,239,232,0.6); padding: clamp(3rem, 5vw, 5rem) var(--gutter) 2rem; }
+    .footer-grid { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: clamp(2rem, 4vw, 4rem); padding-bottom: 3rem; border-bottom: 1px solid rgba(245,239,232,0.08); }
+    .footer-brand-name { font-family: var(--font-display); font-size: 1rem; color: var(--sand); letter-spacing: 0.06em; margin-bottom: 1rem; }
+    .footer-tagline { font-size: 0.85rem; font-style: italic; color: rgba(245,239,232,0.4); line-height: 1.7; margin-bottom: 1.4rem; }
+    .footer-contact a { display: block; font-size: 0.82rem; color: rgba(245,239,232,0.55); line-height: 1.9; transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--mist); }
+    .footer-col-title { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,239,232,0.3); margin-bottom: 1.2rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.55rem; }
+    .footer-links a { font-size: 0.85rem; color: rgba(245,239,232,0.55); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--mist); }
+    .footer-bottom { max-width: var(--max-w); margin: 1.6rem auto 0; display: flex; justify-content: space-between; font-size: 0.72rem; color: rgba(245,239,232,0.25); flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+    }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+  <a href="index.html" onclick="closeMobileMenu()">Home</a>
+  <a href="about.html" onclick="closeMobileMenu()">About Me</a>
+  <a href="services.html" onclick="closeMobileMenu()">Services</a>
+  <a href="3d-design.html" onclick="closeMobileMenu()" class="mobile-sub-link">— 3D Design</a>
+  <a href="construction-plans.html" onclick="closeMobileMenu()" class="mobile-sub-link">— Construction Plans</a>
+  <a href="design-liaison.html" onclick="closeMobileMenu()" class="mobile-sub-link">— Design Liaison</a>
+  <a href="gallery.html" onclick="closeMobileMenu()">Projects</a>
+  <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
+</nav>
+
+<header id="siteHeader">
+  <nav aria-label="Main navigation">
+    <a href="index.html" class="nav-logo" aria-label="Outdoor Design Chick Home">Outdoor Design Chick</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li class="nav-dropdown">
+        <a href="services.html" class="active">Services
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="dropdown-menu">
+          <a href="3d-design.html">3D Design</a>
+          <div class="dropdown-divider"></div>
+          <a href="construction-plans.html">Construction Plans</a>
+          <div class="dropdown-divider"></div>
+          <a href="design-liaison.html">Design Liaison</a>
+        </div>
+      </li>
+      <li><a href="gallery.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Start Your Project</a>
+    <button class="nav-toggle" onclick="openMobileMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">What We Do</p>
+    <h1 class="page-title">Our Services</h1>
+    <p class="page-subtitle">From the first 3D rendering to the final build walkthrough — every service designed to bring your outdoor vision to life with precision and intention.</p>
+  </div>
+</div>
+
+<section class="services-section">
+  <div class="section-inner">
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <h2 class="service-title">3D Design</h2>
+        <p class="service-desc">Photorealistic 3D renderings and design videos that let you see your complete outdoor space — pool, landscape, hardscape, structures, and lighting — before construction begins. Multiple angles, day and night views.</p>
+        <a href="3d-design.html" class="service-link">Learn More <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <h2 class="service-title">Construction Plans</h2>
+        <p class="service-desc">Professional construction drawings and HOA submission packages for pools, landscape, hardscape, and outdoor structures. Contractor-ready documentation that gets projects approved and built accurately.</p>
+        <a href="construction-plans.html" class="service-link">Learn More <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <h2 class="service-title">Design Liaison</h2>
+        <p class="service-desc">Meagen stays engaged through your build — on-site at key milestones, always reachable remotely. Your design advocate from first pour to final walkthrough, making sure what gets built matches what was designed.</p>
+        <a href="design-liaison.html" class="service-link">Learn More <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="cta-inner">
+    <div>
+      <h2 class="cta-title">Ready to Start Your Project?</h2>
+      <p class="cta-sub">Based in Arizona · Designing Worldwide</p>
+    </div>
+    <div class="cta-buttons">
+      <a href="contact.html" class="btn-sand">Get in Touch</a>
+      <a href="tel:6028856917" class="btn-ghost-light">Call 602-885-6917</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-name">Outdoor Design Chick</p>
+      <p class="footer-tagline">Blurring the lines between<br>indoor and outdoor living.</p>
+      <div class="footer-contact">
+        <a href="tel:6028856917">602-885-6917</a>
+        <a href="mailto:meagen@outdoordesignchick.com">meagen@outdoordesignchick.com</a>
+        <span style="font-size:0.82rem; color:rgba(245,239,232,0.55);">Based in Arizona · Designing Worldwide</span>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Pages</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Services</p>
+      <ul class="footer-links">
+        <li><a href="3d-design.html">3D Design</a></li>
+        <li><a href="construction-plans.html">Construction Plans</a></li>
+        <li><a href="design-liaison.html">Design Liaison</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Follow Along</p>
+      <ul class="footer-links">
+        <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Houzz</a></li>
+        <li><a href="#" target="_blank" rel="noopener">Pinterest</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Outdoor Design Chick · Arizona</span>
+    <span>Design by Outdoor Design Chick</span>
+  </div>
+</footer>
+
+<script>
+  function openMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>

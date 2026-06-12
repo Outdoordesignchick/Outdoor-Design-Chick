@@ -629,6 +629,11 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
     }
+    .mobile-sub-link {
+      font-size: clamp(1rem, 3vw, 1.3rem) !important;
+      padding-left: 1.5rem !important;
+      color: rgba(245,239,232,0.6) !important;
+    }
   </style>
 </head>
 <body>
@@ -639,9 +644,9 @@
   <a href="index.html" onclick="closeMobileMenu()">Home</a>
   <a href="about.html" onclick="closeMobileMenu()">About Me</a>
   <a href="services.html" onclick="closeMobileMenu()">Services</a>
-  <a href="3d-design.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— 3D Design</a>
-  <a href="construction-plans.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6); border-bottom:1px solid rgba(245,239,232,0.06);">— Construction Plans</a>
-  <a href="design-liaison.html" onclick="closeMobileMenu()" style="font-size:clamp(1rem,3vw,1.3rem); padding-left:1.5rem; color:rgba(245,239,232,0.6);">— Design Liaison</a>
+  <a href="3d-design.html" onclick="closeMobileMenu()" class="mobile-sub-link">— 3D Design</a>
+  <a href="construction-plans.html" onclick="closeMobileMenu()" class="mobile-sub-link">— Construction Plans</a>
+  <a href="design-liaison.html" onclick="closeMobileMenu()" class="mobile-sub-link">— Design Liaison</a>
   <a href="gallery.html" onclick="closeMobileMenu()">Projects</a>
   <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
 </nav>
