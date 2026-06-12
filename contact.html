@@ -627,28 +627,28 @@
           <div class="field" id="field-service">
             <label>Service Interested In <span class="required">✦</span></label>
             <div class="checkbox-group" id="serviceGroup">
-              <label class="checkbox-pill" onclick="togglePill(this)">
+              <label class="checkbox-pill" onclick="togglePill(event, this)">
                 <input type="checkbox" name="service[]" value="3D Design" />
                 <span class="pill-check">
                   <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.5 6L6.5 2" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </span>
                 3D Design
               </label>
-              <label class="checkbox-pill" onclick="togglePill(this)">
+              <label class="checkbox-pill" onclick="togglePill(event, this)">
                 <input type="checkbox" name="service[]" value="Construction Plans" />
                 <span class="pill-check">
                   <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.5 6L6.5 2" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </span>
                 Construction Plans
               </label>
-              <label class="checkbox-pill" onclick="togglePill(this)">
+              <label class="checkbox-pill" onclick="togglePill(event, this)">
                 <input type="checkbox" name="service[]" value="Design Liaison" />
                 <span class="pill-check">
                   <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.5 6L6.5 2" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </span>
                 Design Liaison
               </label>
-              <label class="checkbox-pill" onclick="togglePill(this)">
+              <label class="checkbox-pill" onclick="togglePill(event, this)">
                 <input type="checkbox" name="service[]" value="All of the Above" />
                 <span class="pill-check">
                   <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.5 6L6.5 2" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -665,22 +665,22 @@
           <div class="field">
             <label>Project Budget <span style="font-size:0.62rem; color:var(--mist); letter-spacing:0.1em;">(construction, not design fee)</span></label>
             <div class="radio-group" id="budgetGroup">
-              <label class="radio-pill" onclick="toggleRadio(this, 'budgetGroup')">
+              <label class="radio-pill" onclick="toggleRadio(event, this, 'budgetGroup')">
                 <input type="radio" name="budget" value="Under $100k" />
                 <span class="radio-dot"></span>
                 Under $100k
               </label>
-              <label class="radio-pill" onclick="toggleRadio(this, 'budgetGroup')">
+              <label class="radio-pill" onclick="toggleRadio(event, this, 'budgetGroup')">
                 <input type="radio" name="budget" value="$100k–$200k" />
                 <span class="radio-dot"></span>
                 $100k – $200k
               </label>
-              <label class="radio-pill" onclick="toggleRadio(this, 'budgetGroup')">
+              <label class="radio-pill" onclick="toggleRadio(event, this, 'budgetGroup')">
                 <input type="radio" name="budget" value="$250k+" />
                 <span class="radio-dot"></span>
                 $250k+
               </label>
-              <label class="radio-pill" onclick="toggleRadio(this, 'budgetGroup')">
+              <label class="radio-pill" onclick="toggleRadio(event, this, 'budgetGroup')">
                 <input type="radio" name="budget" value="Not sure yet" />
                 <span class="radio-dot"></span>
                 Not sure yet
@@ -694,17 +694,17 @@
           <div class="field">
             <label>Do you already have a contractor or designer?</label>
             <div class="radio-group" id="contractorGroup">
-              <label class="radio-pill" onclick="toggleRadio(this, 'contractorGroup')">
+              <label class="radio-pill" onclick="toggleRadio(event, this, 'contractorGroup')">
                 <input type="radio" name="has_contractor" value="Yes" />
                 <span class="radio-dot"></span>
                 Yes
               </label>
-              <label class="radio-pill" onclick="toggleRadio(this, 'contractorGroup')">
+              <label class="radio-pill" onclick="toggleRadio(event, this, 'contractorGroup')">
                 <input type="radio" name="has_contractor" value="No" />
                 <span class="radio-dot"></span>
                 No
               </label>
-              <label class="radio-pill" onclick="toggleRadio(this, 'contractorGroup')">
+              <label class="radio-pill" onclick="toggleRadio(event, this, 'contractorGroup')">
                 <input type="radio" name="has_contractor" value="Still looking" />
                 <span class="radio-dot"></span>
                 Still looking
@@ -855,14 +855,16 @@
   }
 
   // ─── CHECKBOX PILLS ───
-  function togglePill(label) {
+  function togglePill(event, label) {
+    event.preventDefault();
     label.classList.toggle('checked');
     const input = label.querySelector('input[type="checkbox"]');
     input.checked = !input.checked;
   }
 
   // ─── RADIO PILLS ───
-  function toggleRadio(label, groupId) {
+  function toggleRadio(event, label, groupId) {
+    event.preventDefault();
     const group = document.getElementById(groupId);
     group.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('checked'));
     label.classList.add('checked');
