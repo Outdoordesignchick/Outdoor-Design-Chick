@@ -487,10 +487,51 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
     }
+    .mobile-services-toggle {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      color: var(--sand);
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(245,239,232,0.1);
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      background: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: color 0.2s;
+    }
+    .mobile-services-toggle svg {
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .mobile-services-toggle.open svg {
+      transform: rotate(180deg);
+    }
+    .mobile-services-dropdown {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      padding-left: 1rem;
+      border-bottom: 1px solid rgba(245,239,232,0.1);
+    }
+    .mobile-services-dropdown.open {
+      display: flex;
+    }
     .mobile-sub-link {
-      font-size: clamp(1rem, 3vw, 1.3rem) !important;
-      padding-left: 1.5rem !important;
-      color: rgba(245,239,232,0.6) !important;
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      color: rgba(245,239,232,0.65);
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(245,239,232,0.06);
+      display: block;
+    }
+    .mobile-sub-link:last-child {
+      border-bottom: none;
     }
   </style>
 </head>
@@ -501,10 +542,15 @@
   <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
   <a href="index.html" onclick="closeMobileMenu()">Home</a>
   <a href="about.html" onclick="closeMobileMenu()">About Me</a>
-  <a href="services.html" onclick="closeMobileMenu()">Services</a>
-  <a href="3d-design.html" onclick="closeMobileMenu()" class="mobile-sub-link">— 3D Design</a>
-  <a href="construction-plans.html" onclick="closeMobileMenu()" class="mobile-sub-link">— Construction Plans</a>
-  <a href="design-liaison.html" onclick="closeMobileMenu()" class="mobile-sub-link">— Design Liaison</a>
+  <button class="mobile-services-toggle" onclick="toggleMobileServices(event)">
+    Services
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4.5L6 8.5L10 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="mobile-services-dropdown" id="mobileServicesDropdown">
+    <a href="3d-design.html" onclick="closeMobileMenu()" class="mobile-sub-link">3D Design</a>
+    <a href="construction-plans.html" onclick="closeMobileMenu()" class="mobile-sub-link">Construction Plans</a>
+    <a href="design-liaison.html" onclick="closeMobileMenu()" class="mobile-sub-link">Design Liaison</a>
+  </div>
   <a href="gallery.html" onclick="closeMobileMenu()">Projects</a>
   <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
 </nav>
@@ -934,6 +980,18 @@
   function closeMobileMenu() {
     document.getElementById('mobileMenu').classList.remove('open');
     document.body.style.overflow = '';
+    const toggle = document.querySelector('.mobile-services-toggle');
+    const dropdown = document.getElementById('mobileServicesDropdown');
+    if (toggle) toggle.classList.remove('open');
+    if (dropdown) dropdown.classList.remove('open');
+  }
+  function toggleMobileServices(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const toggle = document.querySelector('.mobile-services-toggle');
+    const dropdown = document.getElementById('mobileServicesDropdown');
+    toggle.classList.toggle('open');
+    dropdown.classList.toggle('open');
   }
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
